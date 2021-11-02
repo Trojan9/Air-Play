@@ -1,4 +1,5 @@
 import 'package:Airplay/ui/auth/login.dart';
+import 'package:Airplay/ui/auth/signup.dart';
 import 'package:Airplay/widget/text.dart';
 import 'package:flutter/material.dart';
 import 'package:Airplay/utils/buttons/custom_button.dart';

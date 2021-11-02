@@ -93,19 +93,17 @@ class _CustomTextFieldState extends State<CustomTextField> {
               contentPadding:
                   const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
               labelText: widget.labelText,
-              fillColor: regular,
-              filled: true,
+              fillColor: Colors.white,
+              filled: false,
               hintStyle: TextStyle(
                   color: regular.withOpacity(0.2),
                   fontSize: 15,
-                  fontFamily: 'Brandon'),
+                  fontFamily: 'Montserrat'),
               hintText: widget.hintText,
               labelStyle: const TextStyle(
-                  color: Colors.grey, fontSize: 15, fontFamily: 'Brandon'),
+                  color: Colors.grey, fontSize: 15, fontFamily: 'Montserrat'),
               errorStyle: const TextStyle(color: Color(0xff222222)),
-              border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5.0),
-                  borderSide: BorderSide.none),
+
               // focusedBorder: OutlineInputBorder(
               //   borderRadius: BorderRadius.circular(8),
               //   borderSide:

@@ -1,6 +1,4 @@
-import 'package:Airplay/ui/auth/forgottenpassword.dart';
-import 'package:Airplay/ui/auth/signup.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:Airplay/ui/auth/login.dart';
 import 'package:Airplay/utils/buttons/custom_button.dart';
 import 'package:Airplay/utils/colors.dart';
 import 'package:Airplay/utils/spacing.dart';
@@ -11,14 +9,14 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+class SignUp extends StatefulWidget {
+  const SignUp({Key? key}) : super(key: key);
 
   @override
-  _LoginState createState() => _LoginState();
+  _SignUpState createState() => _SignUpState();
 }
 
-class _LoginState extends State<Login> {
+class _SignUpState extends State<SignUp> {
   // final _firstNameController = TextEditingController();
   // final _lastNameController = TextEditingController();
   final _emailController = TextEditingController();
@@ -53,7 +51,7 @@ class _LoginState extends State<Login> {
                 SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: Text(
-                      "Let’s sign you in.",
+                      "Let’s get you started.",
                       textAlign: TextAlign.left,
                       style: GoogleFonts.montserrat(
                           fontSize: 25,
@@ -64,7 +62,7 @@ class _LoginState extends State<Login> {
                 SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: Text(
-                      "Welcome back, we’ve missed you.",
+                      "Welcome to Airplay, we offer the best service for audio.",
                       textAlign: TextAlign.left,
                       style: GoogleFonts.montserrat(
                           fontSize: 14,
@@ -89,13 +87,23 @@ class _LoginState extends State<Login> {
                   controller: _passwordController,
                   validator: (val) => Validate.validateEmail(val),
                 ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height / 20,
+                ),
+                CustomTextField(
+                  hintText: 'Retype Password',
+                  title: 'Retype Password',
+                  maxLines: 1,
+                  controller: _repasswordController,
+                  validator: (val) => Validate.validateEmail(val),
+                ),
                 const SizedBox(
                   height: 10,
                 ),
                 Align(
                   alignment: Alignment.centerRight,
                   child: Text.rich(TextSpan(
-                      text: 'Don’t have an account?  ',
+                      text: 'Already have an account?  ',
                       style: TextStyle(
                         fontSize: 14,
                         color: regular,
@@ -107,20 +115,19 @@ class _LoginState extends State<Login> {
                                 Navigator.of(context).pushReplacement(
                                     MaterialPageRoute(
                                         builder: (BuildContext context) =>
-                                            const SignUp()));
+                                            const Login()));
                               },
-                            text: 'Sign up ',
+                            text: 'Sign in ',
                             style: const TextStyle(
                               color: Colors.white,
                               //decoration: TextDecoration.underline,
                             )),
                       ])),
                 ),
-                verticalSpaceLarge,
-                verticalSpaceLarge,
+                verticalSpaceMedium,
                 CustomButton(
                   title: 'Login you in...',
-                  text_in: "Sign In",
+                  text_in: "Sign Up",
                   fontSize: 13,
                   height: 50,
                   busy: false,
@@ -138,30 +145,6 @@ class _LoginState extends State<Login> {
                   borderColor: const Color.fromRGBO(2, 53, 60, 1),
                   newWidget: null,
                   width: MediaQuery.of(context).size.width / 2.5,
-                ),
-                Align(
-                  alignment: Alignment.center,
-                  child: Text.rich(TextSpan(
-                      text: 'Forgot Password?  ',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: regular,
-                      ),
-                      children: <TextSpan>[
-                        TextSpan(
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                            const ForgottenPass()));
-                              },
-                            text: 'Click here ',
-                            style: const TextStyle(
-                              color: Colors.white,
-                              //decoration: TextDecoration.underline,
-                            )),
-                      ])),
                 ),
                 verticalSpaceLarge,
                 Row(

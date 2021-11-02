@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:Airplay/utils/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,6 +10,7 @@ class CustomButton extends StatefulWidget {
       {Key? key,
       required this.height,
       required this.width,
+      required this.text_in,
       required this.borderColor,
       required this.onPressed,
       this.checkicon = false,
@@ -23,6 +25,7 @@ class CustomButton extends StatefulWidget {
   final double width;
   final Function() onPressed;
   final bool busy;
+  final String text_in;
   final newWidget;
   final bool checkicon;
   final Color textColor, borderColor;
@@ -53,9 +56,9 @@ class _CustomButtonState extends State<CustomButton> {
               ),
             ],
             color: widget.busy
-                ? widget.buttonColor.withOpacity(0.2)
-                : widget.buttonColor,
-            borderRadius: BorderRadius.circular(8),
+                ? backgroundcolor2.withOpacity(0.2)
+                : backgroundcolor2,
+            borderRadius: BorderRadius.circular(12),
             border: Border.all(
                 color: widget.buttonColor.withOpacity(0.2), width: 2)),
         child: Row(
@@ -76,11 +79,11 @@ class _CustomButtonState extends State<CustomButton> {
                         ),
                         horizontalSpaceMedium,
                         Text(
-                          "Get Started",
-                          style: GoogleFonts.poppins(
+                          widget.text_in,
+                          style: GoogleFonts.montserrat(
                               fontSize: 14,
-                              fontWeight: FontWeight.w300,
-                              color: Colors.white),
+                              fontWeight: FontWeight.w400,
+                              color: regular),
                         )
                         // CustomText(widget.title,
                         //     letterSpacing: 0.5,
@@ -98,11 +101,11 @@ class _CustomButtonState extends State<CustomButton> {
                   widget.checkicon ? widget.newWidget : SizedBox(),
                   widget.checkicon ? horizontalSpaceSmall : SizedBox(width: 0),
                   Text(
-                    "Get Started",
+                    widget.text_in,
                     style: GoogleFonts.poppins(
-                        fontSize: 20,
+                        fontSize: 14,
                         fontWeight: FontWeight.w300,
-                        color: Colors.white),
+                        color: regular),
                   )
                   // CustomText(widget.title,
                   //     letterSpacing: 0.5,

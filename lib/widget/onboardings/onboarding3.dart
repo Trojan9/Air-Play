@@ -1,4 +1,5 @@
 import 'package:Airplay/ui/auth/login.dart';
+import 'package:Airplay/ui/auth/signup.dart';
 import 'package:Airplay/widget/text.dart';
 import 'package:flutter/material.dart';
 import 'package:Airplay/utils/buttons/custom_button.dart';
@@ -18,6 +19,8 @@ class Onboarding3 extends StatefulWidget {
 
 class _Onboarding3State extends State<Onboarding3> {
   void skip() {
+    Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (BuildContext context) => const Login()));
     // print("okay");
   }
 
