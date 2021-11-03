@@ -51,12 +51,12 @@ class _Onboarding3State extends State<Onboarding3> {
                 ),
 
                 Container(
-                  height: MediaQuery.of(context).size.height / 2.5,
-                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height / 2.8,
+                  width: MediaQuery.of(context).size.width / 1.3,
                   decoration: BoxDecoration(
                     color: backgroundcolor2,
                     image: const DecorationImage(
-                      image: AssetImage("assets/6.png"),
+                      image: AssetImage("assets/5.png"),
                       fit: BoxFit.fill,
                     ),
                   ),

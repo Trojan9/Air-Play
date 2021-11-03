@@ -82,7 +82,7 @@ class _SplashScreen extends State<SplashScreen> {
                           width: MediaQuery.of(context).size.width,
                           decoration: const BoxDecoration(
                             image: DecorationImage(
-                              image: AssetImage("assets/7.png"),
+                              image: AssetImage("assets/logo2.png"),
                             ),
                           ),
                         ),
@@ -106,7 +106,7 @@ class _SplashScreen extends State<SplashScreen> {
                           width: MediaQuery.of(context).size.width,
                           decoration: const BoxDecoration(
                             image: DecorationImage(
-                              image: AssetImage("assets/9.png"),
+                              image: AssetImage("assets/logo1.png"),
                             ),
                           ),
                         ),

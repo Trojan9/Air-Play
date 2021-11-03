@@ -1,6 +1,7 @@
 import 'package:Airplay/ui/auth/forgottenpassword.dart';
 import 'package:Airplay/ui/auth/signup.dart';
 import 'package:Airplay/ui/dashboard/home.dart';
+import 'package:Airplay/ui/dashboard/nav_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:Airplay/utils/buttons/custom_button.dart';
 import 'package:Airplay/utils/colors.dart';
@@ -136,7 +137,7 @@ class _LoginState extends State<Login> {
                     //   model.loginUser(data);
                     // }
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (BuildContext context) => const Home()));
+                        builder: (BuildContext context) => const NavBar()));
                   },
                   borderColor: const Color.fromRGBO(2, 53, 60, 1),
                   newWidget: null,

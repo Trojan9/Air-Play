@@ -16,7 +16,7 @@ class _BottomActivityBarState extends State<BottomActivityBar> {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-        top: MediaQuery.of(context).size.height / 1.5,
+        top: MediaQuery.of(context).size.height / 1.68,
         child: Container(
           margin: const EdgeInsets.only(left: 15, right: 15),
           decoration: BoxDecoration(

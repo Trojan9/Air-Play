@@ -1,24 +1,19 @@
-import 'package:Airplay/ui/dashboard/homelistviews/favouritelistview.dart';
-import 'package:Airplay/ui/dashboard/homelistviews/playlistlistview.dart';
-import 'package:Airplay/ui/dashboard/homelistviews/sondslistview.dart';
+import 'package:Airplay/ui/dashboard/driveLIstview/favouritelistview.dart';
+import 'package:Airplay/ui/dashboard/driveLIstview/playlistlistview.dart';
+import 'package:Airplay/ui/dashboard/driveLIstview/sondslistview.dart';
 import 'package:Airplay/utils/colors.dart';
-import 'package:Airplay/utils/spacing.dart';
-import 'package:Airplay/widget/appbar.dart';
 import 'package:Airplay/widget/appbar/customappbar.dart';
 import 'package:Airplay/widget/bottomactivitybar.dart';
-import 'package:Airplay/widget/customtext.dart';
-import 'package:Airplay/widget/submenu.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
-class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+class Drive extends StatefulWidget {
+  const Drive({Key? key}) : super(key: key);
 
   @override
-  _HomeState createState() => _HomeState();
+  _DriveState createState() => _DriveState();
 }
 
-class _HomeState extends State<Home> {
+class _DriveState extends State<Drive> {
   int page = 0;
 
   refresh(int pageno) {
@@ -45,10 +40,10 @@ class _HomeState extends State<Home> {
           children: [
             SingleChildScrollView(
               child: page == 0
-                  ? FavouriteLV()
+                  ? FavouriteDriveLV()
                   : page == 1
-                      ? PlaylistLV()
-                      : SongsLV(),
+                      ? PlaylistDriveLV()
+                      : SongsDriveLV(),
             ),
             BottomActivityBar()
           ],

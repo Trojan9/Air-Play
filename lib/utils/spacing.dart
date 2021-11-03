@@ -18,6 +18,8 @@ Widget spacedDivider = Column(
 );
 double wholescreenWidth(BuildContext context) =>
     MediaQuery.of(context).size.width;
+double wholescreenHeight(BuildContext context) =>
+    MediaQuery.of(context).size.height;
 Widget verticalSpace(double height) => SizedBox(height: height);
 
 double screenWidth(BuildContext context) =>
