@@ -54,7 +54,7 @@ class _NowPlayingState extends State<NowPlaying> {
                   Text(
                     'Mayorkun & Victony',
                     style: TextStyle(
-                      fontSize: heightSize * 0.025,
+                      fontSize: heightSize * 0.023,
                       fontWeight: FontWeight.w200,
                       color: Colors.white,
                       letterSpacing: 0.5,
@@ -84,6 +84,7 @@ class _NowPlayingState extends State<NowPlaying> {
                   ),
                 ],
               ),
+              SizedBox(height: heightSize * 0.005),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -127,7 +128,7 @@ class _NowPlayingState extends State<NowPlaying> {
                       ],
                     ),
                   ),
-                  SizedBox(height: heightSize * 0.035),
+                  SizedBox(height: heightSize * 0.040),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
