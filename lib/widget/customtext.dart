@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:Airplay/utils/colors.dart';
 
 class CustomText extends StatefulWidget {
   final double size;
