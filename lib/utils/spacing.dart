@@ -16,10 +16,13 @@ Widget spacedDivider = Column(
     verticalSpaceMedium
   ],
 );
+
 double wholescreenWidth(BuildContext context) =>
     MediaQuery.of(context).size.width;
+
 double wholescreenHeight(BuildContext context) =>
     MediaQuery.of(context).size.height;
+
 Widget verticalSpace(double height) => SizedBox(height: height);
 
 double screenWidth(BuildContext context) =>
@@ -28,5 +31,9 @@ double screenWidth(BuildContext context) =>
     MediaQuery.of(context).padding.right;
 
 double screenHeight(BuildContext context) => MediaQuery.of(context).size.height;
-    // MediaQuery.of(context).padding.top +
-    // MediaQuery.of(context).padding.bottom;
+// MediaQuery.of(context).padding.top +
+// MediaQuery.of(context).padding.bottom;
+
+//..
+double screenHeightSize(BuildContext context) =>
+    MediaQuery.of(context).size.height;

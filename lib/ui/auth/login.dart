@@ -92,7 +92,7 @@ class _LoginState extends State<Login> {
                   validator: (val) => Validate.validateEmail(val),
                 ),
                 const SizedBox(
-                  height: 10,
+                  height: 30,
                 ),
                 Align(
                   alignment: Alignment.centerRight,
@@ -143,6 +143,7 @@ class _LoginState extends State<Login> {
                   newWidget: null,
                   width: MediaQuery.of(context).size.width / 2.5,
                 ),
+                verticalSpaceLarge,
                 Align(
                   alignment: Alignment.center,
                   child: Text.rich(TextSpan(
