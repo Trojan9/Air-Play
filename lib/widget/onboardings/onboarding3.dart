@@ -57,7 +57,7 @@ class _Onboarding3State extends State<Onboarding3> {
                     color: backgroundcolor2,
                     image: const DecorationImage(
                       image: AssetImage("assets/5.png"),
-                      fit: BoxFit.fill,
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),
