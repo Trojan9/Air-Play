@@ -136,8 +136,11 @@ class _LoginState extends State<Login> {
                     //   print(data);
                     //   model.loginUser(data);
                     // }
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (BuildContext context) => const NavBar()));
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => const NavBar(),
+                      ),
+                    );
                   },
                   borderColor: const Color.fromRGBO(2, 53, 60, 1),
                   newWidget: null,

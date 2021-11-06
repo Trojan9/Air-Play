@@ -40,7 +40,7 @@ class _HomeState extends State<Home> {
         appBar: PreferredSize(
             preferredSize: const Size.fromHeight(125),
             child: CustomAppBar(notifyParent: refresh)),
-        backgroundColor: backgroundcolor2,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         body: Stack(
           children: [
             SingleChildScrollView(

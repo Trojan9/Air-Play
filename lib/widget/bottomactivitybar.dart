@@ -20,8 +20,18 @@ class _BottomActivityBarState extends State<BottomActivityBar> {
         child: Container(
           margin: const EdgeInsets.only(left: 15, right: 15),
           decoration: BoxDecoration(
-              color: const Color.fromRGBO(2, 53, 60, 1),
-              borderRadius: BorderRadius.circular(200)),
+            color: Theme.of(context)
+                .primaryColor, // const Color.fromRGBO(2, 53, 60, 1),
+            borderRadius: BorderRadius.circular(200),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.4),
+                spreadRadius: 1,
+                blurRadius: 1,
+                // offset: Offset(0, 3),
+              ),
+            ],
+          ),
           width: wholescreenWidth(context) / 1.08,
           height: MediaQuery.of(context).size.height / 9,
           child: Padding(
@@ -33,9 +43,9 @@ class _BottomActivityBarState extends State<BottomActivityBar> {
                     borderRadius: BorderRadius.circular(200.0),
                     child: Image.asset(
                       "assets/song.png",
-                      height: MediaQuery.of(context).size.height / 12,
-                      width: wholescreenWidth(context) / 8,
-                      fit: BoxFit.fill,
+                      height: MediaQuery.of(context).size.height / 13,
+                      width: wholescreenWidth(context) / 7,
+                      fit: BoxFit.cover,
                     )),
                 Container(
                   width: wholescreenWidth(context) / 4,
@@ -44,18 +54,33 @@ class _BottomActivityBarState extends State<BottomActivityBar> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       CustomText(
-                          size: 14,
-                          color: backgroundcolor1,
-                          fontWeight: FontWeight.w400,
-                          text: "Playlist 1"),
+                        size: 14,
+                        color: (Theme.of(context)
+                            .textTheme
+                            .bodyText1!
+                            .color)!, //backgroundcolor1,
+                        fontWeight: (Theme.of(context)
+                            .textTheme
+                            .bodyText1!
+                            .fontWeight)!,
+                        text: "Playlist 1",
+                      ),
                       verticalSpaceSmall,
-                      Text("Mayorkun & Victony",
-                          maxLines: 1,
-                          style: GoogleFonts.montserrat(
-                            color: regular,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                          )),
+                      Text(
+                        "Mayorkun & Victony",
+                        maxLines: 1,
+                        style: GoogleFonts.montserrat(
+                          color: (Theme.of(context)
+                              .textTheme
+                              .subtitle1!
+                              .color)!, // regular,
+                          fontSize: 14,
+                          fontWeight: (Theme.of(context)
+                              .textTheme
+                              .subtitle1!
+                              .fontWeight)!,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -65,12 +90,14 @@ class _BottomActivityBarState extends State<BottomActivityBar> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.skip_previous_sharp,
-                            size: 25,
-                            color: backgroundcolor2,
-                          )),
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.skip_previous_sharp,
+                          size: 35,
+                          color: backgroundcolor2,
+                        ),
+                        padding: EdgeInsets.all(0),
+                      ),
                       playing
                           ? IconButton(
                               onPressed: () {
@@ -80,7 +107,7 @@ class _BottomActivityBarState extends State<BottomActivityBar> {
                               },
                               icon: Icon(
                                 Icons.pause_sharp,
-                                size: 25,
+                                size: 35,
                                 color: backgroundcolor2,
                               ))
                           : IconButton(
@@ -91,16 +118,20 @@ class _BottomActivityBarState extends State<BottomActivityBar> {
                               },
                               icon: Icon(
                                 Icons.play_arrow_sharp,
-                                size: 25,
+                                size: 35,
                                 color: backgroundcolor2,
-                              )),
+                              ),
+                              padding: EdgeInsets.all(0),
+                            ),
                       IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.skip_next_sharp,
-                            size: 25,
-                            color: backgroundcolor2,
-                          )),
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.skip_next_sharp,
+                          size: 35,
+                          color: backgroundcolor2,
+                        ),
+                        padding: EdgeInsets.all(0),
+                      ),
                     ],
                   ),
                 )
