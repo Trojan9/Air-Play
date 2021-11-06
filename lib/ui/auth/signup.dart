@@ -26,7 +26,7 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundcolor2,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SingleChildScrollView(
         child: Container(
           height: MediaQuery.of(context).size.height,
@@ -39,12 +39,14 @@ class _SignUpState extends State<SignUp> {
                 SizedBox(
                   width: MediaQuery.of(context).size.width,
                   child: Center(
-                    child: Text("Airplay",
-                        style: GoogleFonts.montserrat(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w400,
-                        )),
+                    child: Text(
+                      "Airplay",
+                      style: GoogleFonts.montserrat(
+                        color: (Theme.of(context).textTheme.bodyText1!.color)!,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
                   ),
                 ),
                 verticalSpaceMedium,
@@ -54,9 +56,10 @@ class _SignUpState extends State<SignUp> {
                       "Let’s get you started.",
                       textAlign: TextAlign.left,
                       style: GoogleFonts.montserrat(
-                          fontSize: 25,
-                          fontWeight: FontWeight.w400,
-                          color: backgroundcolor1),
+                        fontSize: 25,
+                        fontWeight: FontWeight.w400,
+                        color: (Theme.of(context).textTheme.bodyText1!.color)!,
+                      ),
                     )),
                 verticalSpaceMedium,
                 SizedBox(
@@ -65,9 +68,10 @@ class _SignUpState extends State<SignUp> {
                       "Welcome to Airplay, we offer the best service for audio.",
                       textAlign: TextAlign.left,
                       style: GoogleFonts.montserrat(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          color: backgroundcolor1),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        color: (Theme.of(context).textTheme.bodyText1!.color)!,
+                      ),
                     )),
                 verticalSpaceMedium,
                 CustomTextField(
@@ -102,7 +106,8 @@ class _SignUpState extends State<SignUp> {
                 ),
                 Align(
                   alignment: Alignment.centerRight,
-                  child: Text.rich(TextSpan(
+                  child: Text.rich(
+                    TextSpan(
                       text: 'Already have an account?  ',
                       style: TextStyle(
                         fontSize: 14,
@@ -110,21 +115,29 @@ class _SignUpState extends State<SignUp> {
                       ),
                       children: <TextSpan>[
                         TextSpan(
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                            const Login()));
-                              },
-                            text: 'Sign in ',
-                            style: const TextStyle(
-                              color: Colors.white,
-                              //decoration: TextDecoration.underline,
-                            )),
-                      ])),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      const Login(),
+                                ),
+                              );
+                            },
+                          text: 'Sign in ',
+                          style: TextStyle(
+                            color:
+                                (Theme.of(context).textTheme.bodyText1!.color)!,
+                            //decoration: TextDecoration.underline,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
-                verticalSpaceMedium,
+                // verticalSpaceMedium,
+                // verticalSpaceMedium,
+                Spacer(),
                 CustomButton(
                   title: 'Login you in...',
                   text_in: "Sign Up",
@@ -159,7 +172,9 @@ class _SignUpState extends State<SignUp> {
                     InkWell(onTap: () {}, child: Image.asset("assets/2.png")),
                     InkWell(onTap: () {}, child: Image.asset("assets/3.png")),
                   ],
-                )
+                ),
+                verticalSpaceLarge,
+                verticalSpaceLarge,
               ],
             ),
           ),

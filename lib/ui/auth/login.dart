@@ -122,9 +122,11 @@ class _LoginState extends State<Login> {
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
                               Navigator.of(context).pushReplacement(
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          const SignUp()));
+                                MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      const SignUp(),
+                                ),
+                              );
                             },
                           text: 'Sign up ',
                           style: TextStyle(
@@ -179,9 +181,11 @@ class _LoginState extends State<Login> {
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
                               Navigator.of(context).pushReplacement(
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          const ForgottenPass()));
+                                MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      const ForgottenPass(),
+                                ),
+                              );
                             },
                           text: 'Click here ',
                           style: TextStyle(
