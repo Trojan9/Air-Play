@@ -1,4 +1,7 @@
+import 'package:Airplay/ui/dashboard/nav_bar.dart';
 import 'package:Airplay/ui/onboarding/splashscreen.dart';
+import 'package:Airplay/utils/theme/config.dart';
+import 'package:Airplay/utils/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
 // import 'package:Airplay/ui/onboarding/splash.dart';
 
@@ -15,29 +18,37 @@ Future<void> main() async {
 
 //ValueNotifier<int> cartCount;
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+    currentTheme.addListener(() {
+      setState(() {});
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
 
-      theme: ThemeData(
-          textTheme: GoogleFonts.nunitoTextTheme(Theme.of(context).textTheme),
-          primaryColor: Colors.white,
-          visualDensity: VisualDensity.adaptivePlatformDensity),
+      // theme: ThemeData(
+      //   textTheme: GoogleFonts.nunitoTextTheme(Theme.of(context).textTheme),
+      //   primaryColor: Colors.white,
+      //   visualDensity: VisualDensity.adaptivePlatformDensity,
+      // ),
 
-      home: const SplashScreen(),
-      // home: HomeScreen(),
-      // builder: (BuildContext context, Widget child) => Navigator(
-      //     key: locator<DialogService>().dialogNavigationKey,
-      //     onGenerateRoute: (RouteSettings settings) =>
-      //         MaterialPageRoute<dynamic>(
-      //             builder: (BuildContext context) =>
-      //                 DialogManager(child: child))),
-      // navigatorKey: locator<NavigationService>().navigationKey,
-      // onGenerateRoute: generateRoute,
+      theme: CustomTheme.lightTheme,
+      darkTheme: CustomTheme.darkTheme,
+      themeMode: currentTheme.currentTheme,
+      home: NavBar(), // SplashScreen(),
     );
   }
 }

@@ -97,7 +97,7 @@ class _Onboarding1State extends State<Onboarding1> {
                     children: [
                       TextButtonArrow(
                         fn: skip,
-                        text: 'SKip',
+                        text: 'Skip',
                         colors: regular,
                       ),
                       TextButtonArrow(

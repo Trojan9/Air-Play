@@ -26,7 +26,11 @@ class _NavBarState extends State<NavBar> {
           physics: NeverScrollableScrollPhysics(),
           controller: _pageController,
           onPageChanged: onPageChanged,
-          children: const <Widget>[Home(), Drive(), Profile()],
+          children: const <Widget>[
+            Home(),
+            Drive(),
+            Profile(),
+          ],
         ),
         bottomNavigationBar: ClipRRect(
           borderRadius: const BorderRadius.only(
@@ -34,7 +38,7 @@ class _NavBarState extends State<NavBar> {
             topLeft: Radius.circular(10),
           ),
           child: BottomAppBar(
-            color: backgroundcolor2,
+            color: Theme.of(context).scaffoldBackgroundColor,
             child: SizedBox(
               height: 50,
               child: Row(

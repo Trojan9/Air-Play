@@ -14,6 +14,7 @@ class _SubMenuState extends State<SubMenu> {
   int page = 0;
   @override
   Widget build(BuildContext context) {
+    Color? color1 = (Theme.of(context).textTheme.headline1!.color)!;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
@@ -25,10 +26,11 @@ class _SubMenuState extends State<SubMenu> {
             });
           },
           child: CustomText(
-              size: 14,
-              color: page == 0 ? backgroundcolor1 : regular,
-              fontWeight: FontWeight.w400,
-              text: "Favourites"),
+            size: 14,
+            color: page == 0 ? color1 : subMenuColor,
+            fontWeight: FontWeight.w500,
+            text: "Favourites",
+          ),
         ),
         InkWell(
           onTap: () {
@@ -39,8 +41,8 @@ class _SubMenuState extends State<SubMenu> {
           },
           child: CustomText(
               size: 14,
-              color: page == 1 ? backgroundcolor1 : regular,
-              fontWeight: FontWeight.w400,
+              color: page == 1 ? color1 : subMenuColor,
+              fontWeight: FontWeight.w500,
               text: "Playlist"),
         ),
         InkWell(
@@ -52,8 +54,10 @@ class _SubMenuState extends State<SubMenu> {
           },
           child: CustomText(
               size: 14,
-              color: page == 2 ? backgroundcolor1 : regular,
-              fontWeight: FontWeight.w400,
+              color: page == 2
+                  ? color1
+                  : subMenuColor, // page == 2 ? backgroundcolor1 : regular,
+              fontWeight: FontWeight.w500,
               text: "Songs"),
         ),
       ],
