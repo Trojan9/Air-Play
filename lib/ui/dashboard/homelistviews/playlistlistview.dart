@@ -1,3 +1,4 @@
+import 'package:Airplay/ui/now_playing/now_playing.dart';
 import 'package:Airplay/utils/colors.dart';
 import 'package:Airplay/utils/spacing.dart';
 import 'package:Airplay/widget/customtext.dart';
@@ -39,16 +40,30 @@ class _PlaylistLVState extends State<PlaylistLV> {
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 CustomText(
-                                    size: 14,
-                                    color: backgroundcolor1,
-                                    fontWeight: FontWeight.w400,
-                                    text: "Playlist 1"),
+                                  size: 16,
+                                  color: (Theme.of(context)
+                                      .textTheme
+                                      .bodyText1!
+                                      .color)!, //backgroundcolor1,
+                                  fontWeight: (Theme.of(context)
+                                      .textTheme
+                                      .bodyText1!
+                                      .fontWeight)!,
+                                  text: "Playlist 1",
+                                ),
                                 verticalSpaceSmall,
                                 CustomText(
-                                    size: 14,
-                                    color: regular,
-                                    fontWeight: FontWeight.w400,
-                                    text: "Mayorkun & Victony")
+                                  size: 15,
+                                  color: (Theme.of(context)
+                                      .textTheme
+                                      .subtitle1!
+                                      .color)!, // regular,
+                                  fontWeight: (Theme.of(context)
+                                      .textTheme
+                                      .subtitle1!
+                                      .fontWeight)!, //FontWeight.normal,
+                                  text: "Mayorkun & Victony",
+                                ),
                               ],
                             ),
                             SizedBox(

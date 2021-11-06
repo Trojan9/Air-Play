@@ -43,16 +43,30 @@ class _SongsLVState extends State<SongsLV> {
                                     MainAxisAlignment.spaceAround,
                                 children: [
                                   CustomText(
-                                      size: 14,
-                                      color: backgroundcolor1,
-                                      fontWeight: FontWeight.w400,
-                                      text: "Playlist 1"),
+                                    size: 16,
+                                    color: (Theme.of(context)
+                                        .textTheme
+                                        .bodyText1!
+                                        .color)!, //backgroundcolor1,
+                                    fontWeight: (Theme.of(context)
+                                        .textTheme
+                                        .bodyText1!
+                                        .fontWeight)!,
+                                    text: "Playlist 1",
+                                  ),
                                   verticalSpaceSmall,
                                   CustomText(
-                                      size: 14,
-                                      color: regular,
-                                      fontWeight: FontWeight.w400,
-                                      text: "Mayorkun & Victony")
+                                    size: 15,
+                                    color: (Theme.of(context)
+                                        .textTheme
+                                        .subtitle1!
+                                        .color)!, // regular,
+                                    fontWeight: (Theme.of(context)
+                                        .textTheme
+                                        .subtitle1!
+                                        .fontWeight)!, //FontWeight.normal,
+                                    text: "Mayorkun & Victony",
+                                  ),
                                 ],
                               ),
                               SizedBox(

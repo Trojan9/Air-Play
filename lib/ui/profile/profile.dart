@@ -15,13 +15,13 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundcolor2,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(125),
         child: SafeArea(
           child: Container(
             width: wholescreenWidth(context),
-            color: backgroundcolor2,
+            color: Theme.of(context).scaffoldBackgroundColor,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -76,9 +76,14 @@ class _ProfileState extends State<Profile> {
               verticalSpaceMedium,
               verticalSpaceMedium,
               Container(
-                color: const Color.fromRGBO(0, 25, 29, 1),
                 width: wholescreenWidth(context),
                 height: wholescreenHeight(context) / 7,
+                decoration: BoxDecoration(
+                  color: Theme.of(context)
+                      .cardColor, // const Color.fromRGBO(0, 25, 29, 1),
+
+                  border: Border.all(color: Colors.black26),
+                ),
                 child: Padding(
                   padding: const EdgeInsets.all(18.0),
                   child: Column(
@@ -86,23 +91,39 @@ class _ProfileState extends State<Profile> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CustomText(
-                          size: 14,
-                          color: regular,
-                          fontWeight: FontWeight.w400,
-                          text: "Email Address"),
+                        size: 16,
+                        color: regular,
+                        fontWeight: (Theme.of(context)
+                            .textTheme
+                            .bodyText1!
+                            .fontWeight)!,
+                        text: "Email Address",
+                      ),
                       verticalSpaceSmall,
                       CustomText(
-                          size: 14,
-                          color: backgroundcolor1,
-                          fontWeight: FontWeight.w400,
-                          text: "danieloludiya@gmail.com"),
+                        size: 15,
+                        color: (Theme.of(context)
+                            .textTheme
+                            .subtitle1!
+                            .color)!, // regular,
+                        fontWeight: (Theme.of(context)
+                            .textTheme
+                            .subtitle1!
+                            .fontWeight)!, //FontWeight.normal,
+                        text: "danieloludiya@gmail.com",
+                      ),
                     ],
                   ),
                 ),
               ),
               verticalSpaceMedium,
               Container(
-                  color: const Color.fromRGBO(0, 25, 29, 1),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context)
+                        .cardColor, // const Color.fromRGBO(0, 25, 29, 1),
+
+                    border: Border.all(color: Colors.black26),
+                  ),
                   width: wholescreenWidth(context),
                   height: wholescreenHeight(context) / 7,
                   child: Padding(
@@ -112,22 +133,38 @@ class _ProfileState extends State<Profile> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         CustomText(
-                            size: 14,
-                            color: regular,
-                            fontWeight: FontWeight.w400,
-                            text: "First Name"),
+                          size: 16,
+                          color: regular,
+                          fontWeight: (Theme.of(context)
+                              .textTheme
+                              .bodyText1!
+                              .fontWeight)!,
+                          text: "First Name",
+                        ),
                         verticalSpaceSmall,
                         CustomText(
-                            size: 14,
-                            color: backgroundcolor1,
-                            fontWeight: FontWeight.w400,
-                            text: "Daniel")
+                          size: 15,
+                          color: (Theme.of(context)
+                              .textTheme
+                              .subtitle1!
+                              .color)!, // regular,
+                          fontWeight: (Theme.of(context)
+                              .textTheme
+                              .subtitle1!
+                              .fontWeight)!, //FontWeight.normal,
+                          text: "Daniel",
+                        ),
                       ],
                     ),
                   )),
               verticalSpaceMedium,
               Container(
-                  color: const Color.fromRGBO(0, 25, 29, 1),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context)
+                        .cardColor, // const Color.fromRGBO(0, 25, 29, 1),
+
+                    border: Border.all(color: Colors.black26),
+                  ),
                   width: wholescreenWidth(context),
                   height: wholescreenHeight(context) / 7,
                   child: Padding(
@@ -137,22 +174,38 @@ class _ProfileState extends State<Profile> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         CustomText(
-                            size: 14,
-                            color: regular,
-                            fontWeight: FontWeight.w400,
-                            text: "Last Name"),
+                          size: 16,
+                          color: regular,
+                          fontWeight: (Theme.of(context)
+                              .textTheme
+                              .bodyText1!
+                              .fontWeight)!,
+                          text: "Last Name",
+                        ),
                         verticalSpaceSmall,
                         CustomText(
-                            size: 14,
-                            color: backgroundcolor1,
-                            fontWeight: FontWeight.w400,
-                            text: "Oludiya")
+                          size: 15,
+                          color: (Theme.of(context)
+                              .textTheme
+                              .subtitle1!
+                              .color)!, // regular,
+                          fontWeight: (Theme.of(context)
+                              .textTheme
+                              .subtitle1!
+                              .fontWeight)!, //FontWeight.normal,
+                          text: "Oludiya",
+                        ),
                       ],
                     ),
                   )),
               verticalSpaceMedium,
               Container(
-                  color: const Color.fromRGBO(0, 25, 29, 1),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context)
+                        .cardColor, // const Color.fromRGBO(0, 25, 29, 1),
+
+                    border: Border.all(color: Colors.black26),
+                  ),
                   width: wholescreenWidth(context),
                   height: wholescreenHeight(context) / 7,
                   child: Padding(
@@ -162,22 +215,38 @@ class _ProfileState extends State<Profile> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         CustomText(
-                            size: 14,
-                            color: regular,
-                            fontWeight: FontWeight.w400,
-                            text: "GENDER"),
+                          size: 16,
+                          color: regular,
+                          fontWeight: (Theme.of(context)
+                              .textTheme
+                              .bodyText1!
+                              .fontWeight)!,
+                          text: "GENDER",
+                        ),
                         verticalSpaceSmall,
                         CustomText(
-                            size: 14,
-                            color: backgroundcolor1,
-                            fontWeight: FontWeight.w400,
-                            text: "Male")
+                          size: 15,
+                          color: (Theme.of(context)
+                              .textTheme
+                              .subtitle1!
+                              .color)!, // regular,
+                          fontWeight: (Theme.of(context)
+                              .textTheme
+                              .subtitle1!
+                              .fontWeight)!, //FontWeight.normal,
+                          text: "Male",
+                        ),
                       ],
                     ),
                   )),
               verticalSpaceMedium,
               Container(
-                  color: const Color.fromRGBO(0, 25, 29, 1),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context)
+                        .cardColor, // const Color.fromRGBO(0, 25, 29, 1),
+
+                    border: Border.all(color: Colors.black26),
+                  ),
                   width: wholescreenWidth(context),
                   height: wholescreenHeight(context) / 7,
                   child: Padding(
@@ -187,16 +256,27 @@ class _ProfileState extends State<Profile> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         CustomText(
-                            size: 14,
-                            color: regular,
-                            fontWeight: FontWeight.w400,
-                            text: "phone Number"),
+                          size: 16,
+                          color: regular,
+                          fontWeight: (Theme.of(context)
+                              .textTheme
+                              .bodyText1!
+                              .fontWeight)!,
+                          text: "Phone Number",
+                        ),
                         verticalSpaceSmall,
                         CustomText(
-                            size: 14,
-                            color: backgroundcolor1,
-                            fontWeight: FontWeight.w400,
-                            text: "09098881123")
+                          size: 15,
+                          color: (Theme.of(context)
+                              .textTheme
+                              .subtitle1!
+                              .color)!, // regular,
+                          fontWeight: (Theme.of(context)
+                              .textTheme
+                              .subtitle1!
+                              .fontWeight)!, //FontWeight.normal,
+                          text: "09098881123",
+                        ),
                       ],
                     ),
                   )),
@@ -218,12 +298,17 @@ class _ProfileState extends State<Profile> {
                         children: [
                           Icon(
                             Icons.logout,
-                            color: backgroundcolor1,
+                            color:
+                                (Theme.of(context).textTheme.subtitle1!.color)!,
                           ),
+                          SizedBox(width: 10),
                           CustomText(
-                              size: 14,
-                              color: backgroundcolor1,
-                              fontWeight: FontWeight.w400,
+                              size: 18,
+                              color: (Theme.of(context)
+                                  .textTheme
+                                  .subtitle1!
+                                  .color)!, // backgroundcolor1,
+                              fontWeight: FontWeight.w600,
                               text: "Logout")
                         ],
                       ),

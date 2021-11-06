@@ -81,9 +81,10 @@ class _CustomButtonState extends State<CustomButton> {
                         Text(
                           widget.text_in,
                           style: GoogleFonts.montserrat(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
-                              color: regular),
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                            color: Theme.of(context).primaryColor,
+                          ),
                         )
                         // CustomText(widget.title,
                         //     letterSpacing: 0.5,
@@ -103,9 +104,10 @@ class _CustomButtonState extends State<CustomButton> {
                   Text(
                     widget.text_in,
                     style: GoogleFonts.poppins(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w300,
-                        color: regular),
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      color: Theme.of(context).primaryColor,
+                    ),
                   )
                   // CustomText(widget.title,
                   //     letterSpacing: 0.5,

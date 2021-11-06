@@ -96,7 +96,10 @@ class _CustomTextFieldState extends State<CustomTextField> {
               fillColor: Colors.white,
               filled: false,
               hintStyle: TextStyle(
-                  color: Colors.white30, // regular.withOpacity(0.2),
+                  color: Theme.of(context)
+                      .textTheme
+                      .subtitle2!
+                      .color, // regular.withOpacity(0.2),
                   fontSize: 15,
                   fontFamily: 'Montserrat'),
               hintText: widget.hintText,

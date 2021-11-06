@@ -1,3 +1,4 @@
+import 'package:Airplay/ui/auth/login.dart';
 import 'package:Airplay/ui/dashboard/nav_bar.dart';
 import 'package:Airplay/ui/onboarding/splashscreen.dart';
 import 'package:Airplay/utils/theme/config.dart';
@@ -48,7 +49,7 @@ class _MyAppState extends State<MyApp> {
       theme: CustomTheme.lightTheme,
       darkTheme: CustomTheme.darkTheme,
       themeMode: currentTheme.currentTheme,
-      home: NavBar(), // SplashScreen(),
+      home: Login(), // SplashScreen(),
     );
   }
 }

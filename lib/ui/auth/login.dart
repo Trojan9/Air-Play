@@ -2,6 +2,7 @@ import 'package:Airplay/ui/auth/forgottenpassword.dart';
 import 'package:Airplay/ui/auth/signup.dart';
 import 'package:Airplay/ui/dashboard/home.dart';
 import 'package:Airplay/ui/dashboard/nav_bar.dart';
+import 'package:Airplay/utils/theme/config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:Airplay/utils/buttons/custom_button.dart';
 import 'package:Airplay/utils/colors.dart';
@@ -30,7 +31,7 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundcolor2,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SingleChildScrollView(
         child: Container(
           height: MediaQuery.of(context).size.height,
@@ -43,12 +44,23 @@ class _LoginState extends State<Login> {
                 SizedBox(
                   width: MediaQuery.of(context).size.width,
                   child: Center(
-                    child: Text("Airplay",
-                        style: GoogleFonts.montserrat(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w400,
-                        )),
+                    child: InkWell(
+                        child: Text(
+                          "Airplay",
+                          style: GoogleFonts.montserrat(
+                            color:
+                                (Theme.of(context).textTheme.bodyText1!.color)!,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        onTap: () {
+                          var oldTheme = currentTheme.currentTheme;
+                          // print(currentTheme.currentTheme);
+                          currentTheme.toggleTheme();
+                          print(
+                              'Theme has changed from $oldTheme to ${currentTheme.currentTheme}');
+                        }),
                   ),
                 ),
                 verticalSpaceMedium,
@@ -58,9 +70,10 @@ class _LoginState extends State<Login> {
                       "Let’s sign you in.",
                       textAlign: TextAlign.left,
                       style: GoogleFonts.montserrat(
-                          fontSize: 25,
-                          fontWeight: FontWeight.w400,
-                          color: backgroundcolor1),
+                        fontSize: 25,
+                        fontWeight: FontWeight.w400,
+                        color: (Theme.of(context).textTheme.bodyText1!.color)!,
+                      ),
                     )),
                 verticalSpaceMedium,
                 SizedBox(
@@ -69,9 +82,10 @@ class _LoginState extends State<Login> {
                       "Welcome back, we’ve missed you.",
                       textAlign: TextAlign.left,
                       style: GoogleFonts.montserrat(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          color: backgroundcolor1),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        color: (Theme.of(context).textTheme.bodyText1!.color)!,
+                      ),
                     )),
                 verticalSpaceMedium,
                 CustomTextField(
@@ -96,7 +110,8 @@ class _LoginState extends State<Login> {
                 ),
                 Align(
                   alignment: Alignment.centerRight,
-                  child: Text.rich(TextSpan(
+                  child: Text.rich(
+                    TextSpan(
                       text: 'Don’t have an account?  ',
                       style: TextStyle(
                         fontSize: 14,
@@ -104,19 +119,22 @@ class _LoginState extends State<Login> {
                       ),
                       children: <TextSpan>[
                         TextSpan(
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                            const SignUp()));
-                              },
-                            text: 'Sign up ',
-                            style: const TextStyle(
-                              color: Colors.white,
-                              //decoration: TextDecoration.underline,
-                            )),
-                      ])),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          const SignUp()));
+                            },
+                          text: 'Sign up ',
+                          style: TextStyle(
+                            color: Theme.of(context).textTheme.bodyText1!.color,
+                            //decoration: TextDecoration.underline,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
                 verticalSpaceLarge,
                 verticalSpaceLarge,
@@ -149,7 +167,8 @@ class _LoginState extends State<Login> {
                 verticalSpaceLarge,
                 Align(
                   alignment: Alignment.center,
-                  child: Text.rich(TextSpan(
+                  child: Text.rich(
+                    TextSpan(
                       text: 'Forgot Password?  ',
                       style: TextStyle(
                         fontSize: 14,
@@ -157,19 +176,23 @@ class _LoginState extends State<Login> {
                       ),
                       children: <TextSpan>[
                         TextSpan(
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                            const ForgottenPass()));
-                              },
-                            text: 'Click here ',
-                            style: const TextStyle(
-                              color: Colors.white,
-                              //decoration: TextDecoration.underline,
-                            )),
-                      ])),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          const ForgottenPass()));
+                            },
+                          text: 'Click here ',
+                          style: TextStyle(
+                            color:
+                                (Theme.of(context).textTheme.bodyText1!.color)!,
+                            //decoration: TextDecoration.underline,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
                 verticalSpaceLarge,
                 Row(

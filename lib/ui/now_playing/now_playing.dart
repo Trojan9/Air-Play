@@ -17,7 +17,7 @@ class _NowPlayingState extends State<NowPlaying> {
   Widget build(BuildContext context) {
     double heightSize = screenHeightSize(context);
     return Scaffold(
-      backgroundColor: backgroundcolor2,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: heightSize * 0.020),
@@ -45,8 +45,8 @@ class _NowPlayingState extends State<NowPlaying> {
                     'Holy Father',
                     style: TextStyle(
                       fontSize: heightSize * 0.025,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white,
+                      fontWeight: FontWeight.w800,
+                      color: (Theme.of(context).textTheme.headline2!.color)!,
                       letterSpacing: 1,
                     ),
                   ),
@@ -55,9 +55,9 @@ class _NowPlayingState extends State<NowPlaying> {
                     'Mayorkun & Victony',
                     style: TextStyle(
                       fontSize: heightSize * 0.023,
-                      fontWeight: FontWeight.w200,
-                      color: Colors.white,
-                      letterSpacing: 0.5,
+                      fontWeight: FontWeight.w400,
+                      color: (Theme.of(context).textTheme.subtitle1!.color)!,
+                      // letterSpacing: 0.5,
                     ),
                   ),
                 ],
@@ -96,7 +96,7 @@ class _NowPlayingState extends State<NowPlaying> {
                       max: 100.0,
                       label: '$_value',
                       activeColor: regular,
-                      inactiveColor: Colors.white,
+                      inactiveColor: Colors.grey,
                       onChanged: (newValue) {
                         setState(() {
                           _value = newValue;
@@ -114,7 +114,8 @@ class _NowPlayingState extends State<NowPlaying> {
                           style: TextStyle(
                             fontSize: heightSize * 0.020,
                             fontWeight: FontWeight.w300,
-                            color: Colors.white,
+                            color:
+                                (Theme.of(context).textTheme.headline2!.color)!,
                           ),
                         ),
                         Text(
@@ -122,7 +123,8 @@ class _NowPlayingState extends State<NowPlaying> {
                           style: TextStyle(
                             fontSize: heightSize * 0.020,
                             fontWeight: FontWeight.w300,
-                            color: Colors.white,
+                            color:
+                                (Theme.of(context).textTheme.headline2!.color)!,
                           ),
                         ),
                       ],
@@ -152,7 +154,7 @@ class _NowPlayingState extends State<NowPlaying> {
                             height: heightSize * 0.064,
                             width: heightSize * 0.064,
                             decoration: BoxDecoration(
-                              color: backgroundcolor2,
+                              color: Theme.of(context).scaffoldBackgroundColor,
                               borderRadius: BorderRadius.circular(100),
                             ),
                             child: Center(
@@ -180,7 +182,7 @@ class _NowPlayingState extends State<NowPlaying> {
                             height: heightSize * 0.064,
                             width: heightSize * 0.064,
                             decoration: BoxDecoration(
-                              color: backgroundcolor2,
+                              color: Theme.of(context).scaffoldBackgroundColor,
                               borderRadius: BorderRadius.circular(100),
                             ),
                             child: Center(
@@ -208,7 +210,7 @@ class _NowPlayingState extends State<NowPlaying> {
                             height: heightSize * 0.064,
                             width: heightSize * 0.064,
                             decoration: BoxDecoration(
-                              color: backgroundcolor2,
+                              color: Theme.of(context).scaffoldBackgroundColor,
                               borderRadius: BorderRadius.circular(100),
                             ),
                             child: Center(
@@ -250,7 +252,7 @@ class SongRowTitle extends StatelessWidget {
     double heightSize = screenHeightSize(context);
 
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: heightSize * 0.015),
+      padding: EdgeInsets.symmetric(vertical: heightSize * 0.025),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -271,9 +273,9 @@ class SongRowTitle extends StatelessWidget {
               Text(
                 'Playing From Songs',
                 style: TextStyle(
-                  fontSize: heightSize * 0.025,
+                  fontSize: heightSize * 0.020,
                   fontWeight: FontWeight.w500,
-                  color: Colors.white,
+                  color: (Theme.of(context).textTheme.headline2!.color)!,
                   letterSpacing: 0.5,
                 ),
               ),
@@ -281,9 +283,9 @@ class SongRowTitle extends StatelessWidget {
               Text(
                 'Mayorkun',
                 style: TextStyle(
-                  fontSize: heightSize * 0.023,
+                  fontSize: heightSize * 0.02,
                   fontWeight: FontWeight.w300,
-                  color: Colors.white,
+                  color: (Theme.of(context).textTheme.subtitle1!.color)!,
                 ),
               ),
             ],

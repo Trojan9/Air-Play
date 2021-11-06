@@ -23,6 +23,10 @@ class CustomTheme with ChangeNotifier {
           color: regular,
           fontSize: 14,
         ),
+        headline2: TextStyle(
+          color: Color.fromRGBO(2, 53, 60, 1),
+          fontSize: 14,
+        ),
         bodyText1: TextStyle(
           color: Colors.black,
           fontSize: 14,
@@ -33,7 +37,16 @@ class CustomTheme with ChangeNotifier {
           fontSize: 14,
           fontWeight: FontWeight.normal,
         ),
+        subtitle2: TextStyle(
+          color: Colors.grey,
+          fontSize: 14,
+          fontWeight: FontWeight.normal,
+        ),
       ),
+      iconTheme: IconThemeData(
+        color: Colors.black,
+      ),
+      cardColor: Colors.white38,
     );
   }
 
@@ -49,6 +62,10 @@ class CustomTheme with ChangeNotifier {
           color: Colors.white,
           fontSize: 14,
         ),
+        headline2: TextStyle(
+          color: Colors.white,
+          fontSize: 14,
+        ),
         bodyText1: TextStyle(
           color: Colors.white,
           fontSize: 14,
@@ -58,7 +75,16 @@ class CustomTheme with ChangeNotifier {
           fontSize: 14,
           fontWeight: FontWeight.normal,
         ),
+        subtitle2: TextStyle(
+          color: Colors.white38,
+          fontSize: 14,
+          fontWeight: FontWeight.normal,
+        ),
       ),
+      iconTheme: IconThemeData(
+        color: backgroundcolor1,
+      ),
+      cardColor: profileContainer,
     );
   }
 }
