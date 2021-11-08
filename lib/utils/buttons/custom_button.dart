@@ -6,21 +6,21 @@ import 'package:google_fonts/google_fonts.dart';
 import '../spacing.dart';
 
 class CustomButton extends StatefulWidget {
-  const CustomButton(
-      {Key? key,
-      required this.height,
-      required this.width,
-      required this.text_in,
-      required this.borderColor,
-      required this.onPressed,
-      this.checkicon = false,
-      this.busy = false,
-      required this.newWidget,
-      this.textColor = Colors.white,
-      this.buttonColor = const Color(0xff03588C),
-      required this.title,
-      required this.fontSize})
-      : super(key: key);
+  const CustomButton({
+    Key? key,
+    required this.height,
+    required this.width,
+    required this.text_in,
+    required this.borderColor,
+    required this.onPressed,
+    this.checkicon = false,
+    this.busy = false,
+    required this.newWidget,
+    this.textColor = Colors.white,
+    this.buttonColor = const Color(0xff03588C),
+    required this.title,
+    required this.fontSize,
+  }) : super(key: key);
   final double height;
   final double width;
   final Function() onPressed;
@@ -47,20 +47,21 @@ class _CustomButtonState extends State<CustomButton> {
         height: widget.height,
         width: widget.width,
         decoration: BoxDecoration(
-            boxShadow: const <BoxShadow>[
-              BoxShadow(
-                blurRadius: 5.0,
-                color: Color(0x20000000),
-                spreadRadius: 0.0,
-                offset: Offset(3.5, 5.0),
-              ),
-            ],
-            color: widget.busy
-                ? backgroundcolor2.withOpacity(0.2)
-                : backgroundcolor2,
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(
-                color: widget.buttonColor.withOpacity(0.2), width: 2)),
+          boxShadow: const <BoxShadow>[
+            BoxShadow(
+              blurRadius: 5.0,
+              color: Color(0x20000000),
+              spreadRadius: 0.0,
+              offset: Offset(3.5, 5.0),
+            ),
+          ],
+          color: widget.busy
+              ? backgroundcolor2.withOpacity(0.2)
+              : backgroundcolor2,
+          borderRadius: BorderRadius.circular(12),
+          border:
+              Border.all(color: widget.buttonColor.withOpacity(0.2), width: 2),
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -73,9 +74,10 @@ class _CustomButtonState extends State<CustomButton> {
                           height: 20,
                           width: 20,
                           child: const CircularProgressIndicator(
-                              strokeWidth: 4.0,
-                              valueColor:
-                                  AlwaysStoppedAnimation<Color>(Colors.white)),
+                            strokeWidth: 4.0,
+                            valueColor:
+                                AlwaysStoppedAnimation<Color>(Colors.white),
+                          ),
                         ),
                         horizontalSpaceMedium,
                         Text(

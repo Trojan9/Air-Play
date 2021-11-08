@@ -1,8 +1,10 @@
+import 'package:Airplay/services/auth_service.dart';
 import 'package:Airplay/ui/auth/login.dart';
 import 'package:Airplay/utils/colors.dart';
 import 'package:Airplay/utils/spacing.dart';
 import 'package:Airplay/widget/customtext.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -14,6 +16,8 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
+    final authService = Provider.of<AuthService>(context);
+
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: PreferredSize(
@@ -294,23 +298,31 @@ class _ProfileState extends State<Profile> {
                       const SizedBox(
                         width: 5,
                       ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.logout,
-                            color:
-                                (Theme.of(context).textTheme.subtitle1!.color)!,
-                          ),
-                          SizedBox(width: 10),
-                          CustomText(
+                      InkWell(
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.logout,
+                              color: (Theme.of(context)
+                                  .textTheme
+                                  .subtitle1!
+                                  .color)!,
+                            ),
+                            SizedBox(width: 10),
+                            CustomText(
                               size: 18,
                               color: (Theme.of(context)
                                   .textTheme
                                   .subtitle1!
                                   .color)!, // backgroundcolor1,
                               fontWeight: FontWeight.w600,
-                              text: "Logout")
-                        ],
+                              text: "Logout",
+                            )
+                          ],
+                        ),
+                        onTap: () async {
+                          await authService.signOut();
+                        },
                       ),
                     ],
                   ),

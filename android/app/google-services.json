@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "254970112011",
+    "project_id": "airplay-c007d",
+    "storage_bucket": "airplay-c007d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:254970112011:android:ff8d883bace6ac3497bf0e",
+        "android_client_info": {
+          "package_name": "com.airplay"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "254970112011-lr17vqi8ec7hvjfg2dth3nl190mdi3mr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqvjC_lNlizXoLm3e6ay91i5hxS2SLtok"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "254970112011-lr17vqi8ec7hvjfg2dth3nl190mdi3mr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,3 +1,4 @@
+import 'package:Airplay/services/auth_service.dart';
 import 'package:Airplay/ui/auth/forgottenpassword.dart';
 import 'package:Airplay/ui/auth/signup.dart';
 import 'package:Airplay/ui/dashboard/home.dart';
@@ -13,6 +14,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -24,12 +26,18 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   // final _firstNameController = TextEditingController();
   // final _lastNameController = TextEditingController();
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-  final _repasswordController = TextEditingController();
-  final _formKey = new GlobalKey<FormState>();
+  // final _repasswordController = TextEditingController();
+
+  bool _spinner = false;
+
   @override
   Widget build(BuildContext context) {
+    final _emailController = TextEditingController();
+    final _passwordController = TextEditingController();
+    final _formKey = new GlobalKey<FormState>();
+
+    final authService = Provider.of<AuthService>(context);
+
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SingleChildScrollView(
@@ -88,22 +96,29 @@ class _LoginState extends State<Login> {
                       ),
                     )),
                 verticalSpaceMedium,
-                CustomTextField(
-                  hintText: 'Email Address or Phone Number',
-                  title: 'Email',
-                  maxLines: 1,
-                  controller: _emailController,
-                  validator: (val) => Validate.validateEmail(val),
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height / 20,
-                ),
-                CustomTextField(
-                  hintText: 'Input Password',
-                  title: 'Input Password',
-                  maxLines: 1,
-                  controller: _passwordController,
-                  validator: (val) => Validate.validateEmail(val),
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      CustomTextField(
+                        hintText: 'Email Address or Phone Number',
+                        title: 'Email',
+                        maxLines: 1,
+                        controller: _emailController,
+                        validator: (val) => Validate.validateEmail(val),
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height / 20,
+                      ),
+                      CustomTextField(
+                        hintText: 'Input Password',
+                        title: 'Input Password',
+                        maxLines: 1,
+                        controller: _passwordController,
+                        validator: (val) => Validate.validateEmail(val),
+                      ),
+                    ],
+                  ),
                 ),
                 const SizedBox(
                   height: 30,
@@ -145,17 +160,30 @@ class _LoginState extends State<Login> {
                   text_in: "Sign In",
                   fontSize: 13,
                   height: 50,
-                  busy: false,
+                  busy: _spinner,
                   buttonColor: const Color.fromRGBO(2, 53, 60, 1),
-                  onPressed: () {
-                    // final Map<String, String> data = {
-                    //   "email": _emailController.text,
-                    //   "password": _passwordController.text
-                    // };
-                    // if (_formKey.currentState.validate()) {
-                    //   print(data);
-                    //   model.loginUser(data);
-                    // }
+                  onPressed: () async {
+                    setState(() {
+                      _spinner = true;
+                    });
+
+                    if (!_formKey.currentState!.validate()) {
+                      print('Not validated');
+                      setState(() {
+                        _spinner = false;
+                      });
+                      return;
+                    }
+
+                    await authService.signInWithEmailAndPassword(
+                      _emailController.text,
+                      _passwordController.text,
+                    );
+
+                    setState(() {
+                      _spinner = false;
+                    });
+
                     Navigator.of(context).pushReplacement(
                       MaterialPageRoute(
                         builder: (BuildContext context) => const NavBar(),
