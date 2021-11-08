@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:Airplay/services/auth_service.dart';
 import 'package:Airplay/ui/auth/forgottenpassword.dart';
 import 'package:Airplay/ui/auth/signup.dart';
 import 'package:Airplay/ui/dashboard/home.dart';
 import 'package:Airplay/ui/dashboard/nav_bar.dart';
 import 'package:Airplay/utils/theme/config.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:Airplay/utils/buttons/custom_button.dart';
 import 'package:Airplay/utils/colors.dart';
@@ -29,13 +32,12 @@ class _LoginState extends State<Login> {
   // final _repasswordController = TextEditingController();
 
   bool _spinner = false;
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _formKey = new GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    final _emailController = TextEditingController();
-    final _passwordController = TextEditingController();
-    final _formKey = new GlobalKey<FormState>();
-
     final authService = Provider.of<AuthService>(context);
 
     return Scaffold(
@@ -175,10 +177,39 @@ class _LoginState extends State<Login> {
                       return;
                     }
 
-                    await authService.signInWithEmailAndPassword(
-                      _emailController.text,
-                      _passwordController.text,
-                    );
+                    try {
+                      await authService.signInWithEmailAndPassword(
+                        _emailController.text,
+                        _passwordController.text,
+                      );
+                    } on Exception catch (err) {
+                      setState(() {
+                        _spinner = false;
+                      });
+                      if (err is SocketException) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Internect Connection Error'),
+                          ),
+                        );
+                        return;
+                      }
+                      if (err is FirebaseAuthException) {
+                        print(err);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Firebase Error'),
+                          ),
+                        );
+                        return;
+                      }
+                    } catch (e) {
+                      setState(() {
+                        _spinner = false;
+                      });
+                      print('-------: $e');
+                      return;
+                    }
 
                     setState(() {
                       _spinner = false;

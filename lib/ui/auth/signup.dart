@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:Airplay/services/auth_service.dart';
 import 'package:Airplay/ui/auth/login.dart';
 import 'package:Airplay/ui/dashboard/nav_bar.dart';
@@ -6,6 +8,7 @@ import 'package:Airplay/utils/colors.dart';
 import 'package:Airplay/utils/spacing.dart';
 import 'package:Airplay/utils/validation.dart';
 import 'package:Airplay/widget/textform/customtextform.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -25,13 +28,13 @@ class _SignUpState extends State<SignUp> {
 
   bool _spinner = false;
 
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _repasswordController = TextEditingController();
+  final _formKey = new GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
-    final _emailController = TextEditingController();
-    final _passwordController = TextEditingController();
-    final _repasswordController = TextEditingController();
-    final _formKey = new GlobalKey<FormState>();
-
     final authService = Provider.of<AuthService>(context);
 
     return Scaffold(
@@ -102,7 +105,7 @@ class _SignUpState extends State<SignUp> {
                         title: 'Input Password',
                         maxLines: 1,
                         controller: _passwordController,
-                        validator: (val) => Validate.validateEmail(val),
+                        validator: (val) => Validate.validatePassword(val),
                       ),
                     ],
                   ),
@@ -115,7 +118,8 @@ class _SignUpState extends State<SignUp> {
                   title: 'Retype Password',
                   maxLines: 1,
                   controller: _repasswordController,
-                  validator: (val) => Validate.validateEmail(val),
+                  validator: (val) => Validate.validateConfirmPassword(
+                      val, _passwordController.text),
                 ),
                 const SizedBox(
                   height: 10,
@@ -174,10 +178,44 @@ class _SignUpState extends State<SignUp> {
                       return;
                     }
 
-                    await authService.createUserWithEmailAndPassword(
-                      _emailController.text,
-                      _passwordController.text,
-                    );
+                    // await authService.createUserWithEmailAndPassword(
+                    //   _emailController.text,
+                    //   _passwordController.text,
+                    // );
+
+                    try {
+                      await authService.createUserWithEmailAndPassword(
+                        _emailController.text,
+                        _passwordController.text,
+                      );
+                    } on Exception catch (err) {
+                      setState(() {
+                        _spinner = false;
+                      });
+                      if (err is SocketException) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Internect Connection Error'),
+                          ),
+                        );
+                        return;
+                      }
+                      if (err is FirebaseAuthException) {
+                        print(err);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Firebase Error'),
+                          ),
+                        );
+                        return;
+                      }
+                    } catch (e) {
+                      setState(() {
+                        _spinner = false;
+                      });
+                      print('-------: $e');
+                      return;
+                    }
 
                     setState(() {
                       _spinner = false;

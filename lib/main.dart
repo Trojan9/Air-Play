@@ -47,23 +47,24 @@ class _MyAppState extends State<MyApp> {
         ),
       ],
       child: MaterialApp(
-          debugShowCheckedModeBanner: false,
+        debugShowCheckedModeBanner: false,
 
-          // theme: ThemeData(
-          //   textTheme: GoogleFonts.nunitoTextTheme(Theme.of(context).textTheme),
-          //   primaryColor: Colors.white,
-          //   visualDensity: VisualDensity.adaptivePlatformDensity,
-          // ),
+        // theme: ThemeData(
+        //   textTheme: GoogleFonts.nunitoTextTheme(Theme.of(context).textTheme),
+        //   primaryColor: Colors.white,
+        //   visualDensity: VisualDensity.adaptivePlatformDensity,
+        // ),
 
-          theme: CustomTheme.lightTheme,
-          darkTheme: CustomTheme.darkTheme,
-          themeMode: currentTheme.currentTheme,
-          // home: TestSite(), // SplashScreen(),
+        theme: CustomTheme.lightTheme,
+        darkTheme: CustomTheme.darkTheme,
+        themeMode: currentTheme.currentTheme,
+        home: TestSite(), // SplashScreen(),
 
-          initialRoute: '/',
-          routes: {
-            '/': (context) => Wrapper(),
-          }),
+        // initialRoute: '/',
+        // routes: {
+        //   '/': (context) => Wrapper(),
+        // },
+      ),
     );
   }
 }
