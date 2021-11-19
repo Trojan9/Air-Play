@@ -12,6 +12,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:get/get.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -27,6 +28,7 @@ class _LoginState extends State<Login> {
   final _passwordController = TextEditingController();
   final _repasswordController = TextEditingController();
   final _formKey = new GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
