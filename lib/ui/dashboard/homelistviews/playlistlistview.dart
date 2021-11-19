@@ -23,7 +23,7 @@ class _PlaylistLVState extends State<PlaylistLV> {
               physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (BuildContext context, int index) {
                 return Container(
-                  color: backgroundcolor2,
+                  color: Theme.of(context).scaffoldBackgroundColor,
                   width: wholescreenWidth(context),
                   height: MediaQuery.of(context).size.height / 10,
                   child: Column(

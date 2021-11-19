@@ -1,5 +1,8 @@
 import 'package:Airplay/utils/colors.dart';
+import 'package:Airplay/utils/colors.dart';
+import 'package:Airplay/utils/colors.dart';
 import 'package:Airplay/utils/spacing.dart';
+import 'package:Airplay/utils/theme/config.dart';
 import 'package:Airplay/widget/customtext.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +14,8 @@ class Appbars extends StatelessWidget {
     return SafeArea(
       child: Container(
         width: wholescreenWidth(context),
-        color: backgroundcolor2,
+        color: Theme.of(context).scaffoldBackgroundColor,
+        // backgroundcolor2, // ThemeMode.dark ? Colors.red : Colors.blue,// backgroundcolor2,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -41,7 +45,14 @@ class Appbars extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        print('Icon clicked');
+                        var oldTheme = currentTheme.currentTheme;
+                        // print(currentTheme.currentTheme);
+                        currentTheme.toggleTheme();
+                        print(
+                            'Theme has changed from $oldTheme to ${currentTheme.currentTheme}');
+                      },
                       icon: Icon(
                         Icons.brightness_2,
                         size: 25,
