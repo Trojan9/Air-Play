@@ -21,7 +21,7 @@ class _NowPlayingState extends State<NowPlaying> {
   double _value = 1.0;
   var meta;
   var filename;
-  Player player = Player(id: 69420);
+  Player player = Player(id: 69420, commandlineArguments: ['--no-video']);
   MediaType mediaType = MediaType.file;
   CurrentState current = new CurrentState();
   PositionState position = new PositionState();
