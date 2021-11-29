@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:Airplay/ui/dashboard/nav_bar.dart';
 import 'package:Airplay/ui/onboarding/splashscreen.dart';
 import 'package:Airplay/utils/theme/config.dart';
@@ -5,6 +6,7 @@ import 'package:Airplay/utils/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
 // import 'package:Airplay/ui/onboarding/splash.dart';
 
+import 'package:dart_vlc/dart_vlc.dart';
 // import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 //import 'core/storage/local_storage.dart';
@@ -12,14 +14,14 @@ import 'package:google_fonts/google_fonts.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  DartVLC.initialize();
   runApp(const MyApp());
 }
 
 //ValueNotifier<int> cartCount;
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({Key key}) : super(key: key);
 
   @override
   State<MyApp> createState() => _MyAppState();

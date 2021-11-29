@@ -25,7 +25,7 @@ class _PlaylistLVState extends State<PlaylistLV> {
                 return Container(
                   color: Theme.of(context).scaffoldBackgroundColor,
                   width: wholescreenWidth(context),
-                  height: MediaQuery.of(context).size.height / 10,
+                  // height: MediaQuery.of(context).size.height / 10,
                   child: Column(
                     children: [
                       Padding(
@@ -34,51 +34,58 @@ class _PlaylistLVState extends State<PlaylistLV> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                CustomText(
-                                    size: 14,
-                                    color: backgroundcolor1,
-                                    fontWeight: FontWeight.w400,
-                                    text: "Playlist 1"),
-                                verticalSpaceSmall,
-                                CustomText(
-                                    size: 14,
-                                    color: regular,
-                                    fontWeight: FontWeight.w400,
-                                    text: "Mayorkun & Victony")
-                              ],
-                            ),
-                            SizedBox(
-                              width: wholescreenWidth(context) / 2.5,
-                              child: Row(
+                            Expanded(
+                              flex: 5,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceAround,
                                 children: [
-                                  // IconButton(
-                                  //     onPressed: () {},
-                                  //     icon: Icon(
-                                  //       Icons.favorite,
-                                  //       size: 25,
-                                  //       color: regular,
-                                  //     )),
-                                  IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(
-                                        Icons.cloud_download,
-                                        size: 25,
-                                        color: regular,
-                                      )),
-                                  IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(
-                                        Icons.more_vert,
-                                        size: 25,
-                                        color: regular,
-                                      )),
+                                  CustomText(
+                                      size: 14,
+                                      color: backgroundcolor1,
+                                      fontWeight: FontWeight.w400,
+                                      text: "Playlist 1"),
+                                  verticalSpaceSmall,
+                                  CustomText(
+                                      size: 14,
+                                      color: regular,
+                                      fontWeight: FontWeight.w400,
+                                      text: "Mayorkun & Victony")
                                 ],
+                              ),
+                            ),
+                            Expanded(
+                              flex: 4,
+                              child: SizedBox(
+                                width: wholescreenWidth(context) / 2.5,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    // IconButton(
+                                    //     onPressed: () {},
+                                    //     icon: Icon(
+                                    //       Icons.favorite,
+                                    //       size: 25,
+                                    //       color: regular,
+                                    //     )),
+                                    IconButton(
+                                        onPressed: () {},
+                                        icon: Icon(
+                                          Icons.cloud_download,
+                                          size: 25,
+                                          color: regular,
+                                        )),
+                                    IconButton(
+                                        onPressed: () {},
+                                        icon: Icon(
+                                          Icons.more_vert,
+                                          size: 25,
+                                          color: regular,
+                                        )),
+                                  ],
+                                ),
                               ),
                             )
                           ],

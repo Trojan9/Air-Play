@@ -61,7 +61,9 @@ class _NavBarState extends State<NavBar> {
                           Icon(
                             Icons.library_music,
                             size: 34.0,
-                            color: _page == 1 ? backgroundcolor1 : regular,
+                            color: _page == 1
+                                ? Theme.of(context).textSelectionColor
+                                : regular,
                           ),
 
                           // onPressed: () => _pageController.jumpToPage(0),
@@ -77,7 +79,9 @@ class _NavBarState extends State<NavBar> {
                           Icon(
                             Icons.person_pin,
                             size: 34.0,
-                            color: _page == 2 ? backgroundcolor1 : regular,
+                            color: _page == 2
+                                ? Theme.of(context).textSelectionColor
+                                : regular,
                           ),
 
                           // onPressed: () => _pageController.jumpToPage(0),

@@ -13,11 +13,13 @@ class CustomTheme with ChangeNotifier {
 
   static ThemeData get lightTheme {
     return ThemeData(
+      textSelectionColor: Colors.black,
       primaryColor: Colors.white,
       scaffoldBackgroundColor: Colors.white,
       buttonTheme: ButtonThemeData(
         buttonColor: Color.fromRGBO(2, 53, 60, 1),
       ),
+      cardColor: Color.fromRGBO(196, 196, 196, 0.12),
       textTheme: TextTheme(
         headline1: TextStyle(
           color: regular,
@@ -40,10 +42,12 @@ class CustomTheme with ChangeNotifier {
   static ThemeData get darkTheme {
     return ThemeData(
       primaryColor: Color.fromRGBO(2, 53, 60, 1),
+      textSelectionColor: backgroundcolor1,
       scaffoldBackgroundColor: backgroundcolor2,
       buttonTheme: ButtonThemeData(
         buttonColor: Color.fromRGBO(2, 53, 60, 1),
       ),
+      cardColor: const Color.fromRGBO(0, 25, 29, 1),
       textTheme: TextTheme(
         headline1: TextStyle(
           color: Colors.white,

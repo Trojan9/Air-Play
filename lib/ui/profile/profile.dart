@@ -15,13 +15,13 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundcolor2,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(125),
         child: SafeArea(
           child: Container(
             width: wholescreenWidth(context),
-            color: backgroundcolor2,
+            color: Theme.of(context).scaffoldBackgroundColor,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -76,7 +76,7 @@ class _ProfileState extends State<Profile> {
               verticalSpaceMedium,
               verticalSpaceMedium,
               Container(
-                color: const Color.fromRGBO(0, 25, 29, 1),
+                color: Theme.of(context).cardColor,
                 width: wholescreenWidth(context),
                 height: wholescreenHeight(context) / 7,
                 child: Padding(
@@ -93,7 +93,7 @@ class _ProfileState extends State<Profile> {
                       verticalSpaceSmall,
                       CustomText(
                           size: 14,
-                          color: backgroundcolor1,
+                          color: Theme.of(context).textSelectionColor,
                           fontWeight: FontWeight.w400,
                           text: "danieloludiya@gmail.com"),
                     ],
@@ -102,7 +102,7 @@ class _ProfileState extends State<Profile> {
               ),
               verticalSpaceMedium,
               Container(
-                  color: const Color.fromRGBO(0, 25, 29, 1),
+                  color: Theme.of(context).cardColor,
                   width: wholescreenWidth(context),
                   height: wholescreenHeight(context) / 7,
                   child: Padding(
@@ -119,7 +119,7 @@ class _ProfileState extends State<Profile> {
                         verticalSpaceSmall,
                         CustomText(
                             size: 14,
-                            color: backgroundcolor1,
+                            color: Theme.of(context).textSelectionColor,
                             fontWeight: FontWeight.w400,
                             text: "Daniel")
                       ],
@@ -127,7 +127,7 @@ class _ProfileState extends State<Profile> {
                   )),
               verticalSpaceMedium,
               Container(
-                  color: const Color.fromRGBO(0, 25, 29, 1),
+                  color: Theme.of(context).cardColor,
                   width: wholescreenWidth(context),
                   height: wholescreenHeight(context) / 7,
                   child: Padding(
@@ -144,7 +144,7 @@ class _ProfileState extends State<Profile> {
                         verticalSpaceSmall,
                         CustomText(
                             size: 14,
-                            color: backgroundcolor1,
+                            color: Theme.of(context).textSelectionColor,
                             fontWeight: FontWeight.w400,
                             text: "Oludiya")
                       ],
@@ -152,7 +152,7 @@ class _ProfileState extends State<Profile> {
                   )),
               verticalSpaceMedium,
               Container(
-                  color: const Color.fromRGBO(0, 25, 29, 1),
+                  color: Theme.of(context).cardColor,
                   width: wholescreenWidth(context),
                   height: wholescreenHeight(context) / 7,
                   child: Padding(
@@ -169,7 +169,7 @@ class _ProfileState extends State<Profile> {
                         verticalSpaceSmall,
                         CustomText(
                             size: 14,
-                            color: backgroundcolor1,
+                            color: Theme.of(context).textSelectionColor,
                             fontWeight: FontWeight.w400,
                             text: "Male")
                       ],
@@ -177,7 +177,7 @@ class _ProfileState extends State<Profile> {
                   )),
               verticalSpaceMedium,
               Container(
-                  color: const Color.fromRGBO(0, 25, 29, 1),
+                  color: Theme.of(context).cardColor,
                   width: wholescreenWidth(context),
                   height: wholescreenHeight(context) / 7,
                   child: Padding(
@@ -194,7 +194,7 @@ class _ProfileState extends State<Profile> {
                         verticalSpaceSmall,
                         CustomText(
                             size: 14,
-                            color: backgroundcolor1,
+                            color: Theme.of(context).textSelectionColor,
                             fontWeight: FontWeight.w400,
                             text: "09098881123")
                       ],
@@ -218,11 +218,11 @@ class _ProfileState extends State<Profile> {
                         children: [
                           Icon(
                             Icons.logout,
-                            color: backgroundcolor1,
+                            color: Theme.of(context).textSelectionColor,
                           ),
                           CustomText(
                               size: 14,
-                              color: backgroundcolor1,
+                              color: Theme.of(context).textSelectionColor,
                               fontWeight: FontWeight.w400,
                               text: "Logout")
                         ],
