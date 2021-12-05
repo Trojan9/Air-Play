@@ -1,13 +1,13 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:io';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:id3/id3.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:Airplay/utils/colors.dart';
 import 'package:Airplay/utils/spacing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:dart_vlc/dart_vlc.dart';
 
 class NowPlaying extends StatefulWidget {
   late File file;
@@ -18,22 +18,15 @@ class NowPlaying extends StatefulWidget {
 }
 
 class _NowPlayingState extends State<NowPlaying> {
+  AudioPlayer audioPlayer = AudioPlayer();
   double _value = 1.0;
   var meta;
   var filename;
-  Player player = Player(id: 69420, commandlineArguments: ['--no-video']);
-  MediaType mediaType = MediaType.file;
-  CurrentState current = new CurrentState();
-  PositionState position = new PositionState();
-  PlaybackState playback = new PlaybackState();
-  GeneralState general = new GeneralState();
-  VideoDimensions videoDimensions = new VideoDimensions(0, 0);
-  List<Media> medias = <Media>[];
-  List<Device> devices = <Device>[];
   TextEditingController controller = new TextEditingController();
   TextEditingController metasController = new TextEditingController();
   double bufferingProgress = 0.0;
-  Media? metasMedia;
+  Duration duration = Duration(seconds: 0, minutes: 0);
+  Duration position = Duration();
   @override
   void initState() {
     // TODO: implement initState
@@ -48,46 +41,56 @@ class _NowPlayingState extends State<NowPlaying> {
         widget.file.path.substring(widget.file.path.lastIndexOf('/') + 1);
 
     super.initState();
-    if (this.mounted) {
-      this.player.currentStream.listen((current) {
-        this.setState(() => this.current = current);
-      });
-      this.player.positionStream.listen((position) {
-        this.setState(() => this.position = position);
-      });
-      this.player.playbackStream.listen((playback) {
-        this.setState(() => this.playback = playback);
-      });
-      this.player.generalStream.listen((general) {
-        this.setState(() => this.general = general);
-      });
-      this.player.videoDimensionsStream.listen((videoDimensions) {
-        this.setState(() {
-          this.videoDimensions = videoDimensions;
-        });
-      });
-      this.player.bufferingProgressStream.listen(
-        (bufferingProgress) {
-          this.setState(() {
-            this.bufferingProgress = bufferingProgress;
-          });
-        },
-      );
+
+    playLocal(widget.file.path);
+    audioPlayer.onDurationChanged.listen((Duration d) {
+      print('Max duration: $d');
+      setState(() => duration = d);
+    });
+    audioPlayer.onAudioPositionChanged.listen((Duration p) =>
+        {print('Current position: $p'), setState(() => position = p)});
+  }
+
+  String checktime(Duration time) {
+    int min = (time.inSeconds / 60).toInt();
+    int seconds = (time.inSeconds % 60).toInt();
+    int hour = (time.inSeconds / 3600).toInt();
+    if (hour > 0) {
+      return "$hour:$min:$seconds";
+    } else if (min > 0) {
+      return "$min:$seconds";
+    } else {
+      return "$min:$seconds";
     }
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    audioPlayer.dispose();
+    super.dispose();
   }
 
   @override
   Future<void> didChangeDependencies() async {
     super.didChangeDependencies();
-    this.devices = Devices.all;
-    Equalizer equalizer = Equalizer.createMode(EqualizerMode.live);
-    equalizer.setPreAmp(10.0);
-    equalizer.setBandAmp(31.25, 10.0);
-    this.player.setEqualizer(equalizer);
+
     this.setState(() {});
   }
 
-  bool play = false;
+  bool play = true;
+  playUrl(var url) async {
+    int result = await audioPlayer.play(url);
+    if (result == 1) {
+      // success
+    }
+  }
+
+  playLocal(var localPath) async {
+    int result = await audioPlayer.play(localPath, isLocal: true);
+    print(result);
+  }
+
   @override
   Widget build(BuildContext context) {
     double heightSize = screenHeightSize(context);
@@ -167,7 +170,7 @@ class _NowPlayingState extends State<NowPlaying> {
                       size: heightSize * 0.045,
                     ),
                     color: regular, // Colors.white,
-                    onPressed: () {},
+                    onPressed: () async {},
                   ),
                   IconButton(
                     icon: Icon(
@@ -175,7 +178,7 @@ class _NowPlayingState extends State<NowPlaying> {
                       size: heightSize * 0.045,
                     ),
                     color: regular, // Colors.white,
-                    onPressed: () {},
+                    onPressed: () async {},
                   ),
                 ],
               ),
@@ -186,32 +189,30 @@ class _NowPlayingState extends State<NowPlaying> {
                   Container(
                     width: double.infinity,
                     child: Slider(
-                        //   value: _value,
-                        //   min: 0.0,
-                        //   max: 100.0,
-                        //   label: '$_value',
-                        //   activeColor: regular,
-                        //   inactiveColor: Colors.white,
-                        //   onChanged: (newValue) {
-                        //     setState(() {
-                        //       _value = newValue;
-                        //     });
-                        //   },
-                        // ),
-                        min: 0,
-                        max:
-                            this.position.duration?.inMilliseconds.toDouble() ??
-                                1.0,
-                        label:
-                            "${this.position.position?.inMilliseconds.toDouble()}",
-                        activeColor: regular,
-                        inactiveColor: Colors.white,
-                        value:
-                            this.position.position?.inMilliseconds.toDouble() ??
-                                0.0,
-                        onChanged: (double position) => this
-                            .player
-                            .seek(Duration(milliseconds: position.toInt()))),
+                      //   value: _value,
+                      //   min: 0.0,
+                      //   max: 100.0,
+                      //   label: '$_value',
+                      //   activeColor: regular,
+                      //   inactiveColor: Colors.white,
+                      //   onChanged: (newValue) {
+                      //     setState(() {
+                      //       _value = newValue;
+                      //     });
+                      //   },
+                      // ),
+                      min: 0,
+                      max: duration.inMilliseconds.toDouble(),
+                      label: "${position.inMilliseconds.toDouble()}",
+                      activeColor: regular,
+                      inactiveColor: Colors.white,
+                      value: position.inMilliseconds.toDouble(),
+                      onChanged: (position) async {
+                        int result = await audioPlayer
+                            .seek(Duration(milliseconds: position.toInt()));
+                        print(result);
+                      },
+                    ),
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20.0),
@@ -219,7 +220,7 @@ class _NowPlayingState extends State<NowPlaying> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          '1:12',
+                          "${checktime(position)}",
                           style: TextStyle(
                             fontSize: heightSize * 0.020,
                             fontWeight: FontWeight.w300,
@@ -227,7 +228,7 @@ class _NowPlayingState extends State<NowPlaying> {
                           ),
                         ),
                         Text(
-                          '3:02',
+                          '${checktime(duration)}',
                           style: TextStyle(
                             fontSize: heightSize * 0.020,
                             fontWeight: FontWeight.w300,
@@ -271,7 +272,11 @@ class _NowPlayingState extends State<NowPlaying> {
                                   size: heightSize * 0.042,
                                 ),
                                 color: regular, // Colors.white,
-                                onPressed: () {},
+                                onPressed: () async {
+                                  int result = await audioPlayer.seek(Duration(
+                                      milliseconds:
+                                          position.inMilliseconds - 1200));
+                                },
                               ),
                             ),
                           ),
@@ -299,11 +304,17 @@ class _NowPlayingState extends State<NowPlaying> {
                                   size: heightSize * 0.042,
                                 ),
                                 color: regular, // Colors.white,
-                                onPressed: () {
+                                onPressed: () async {
                                   if (play) {
-                                    player.pause();
+                                    int result = await audioPlayer.pause();
+                                    setState(() {
+                                      play = false;
+                                    });
                                   } else {
-                                    player.play();
+                                    int result = await audioPlayer.resume();
+                                    setState(() {
+                                      play = true;
+                                    });
                                   }
                                 },
                               ),
@@ -333,7 +344,11 @@ class _NowPlayingState extends State<NowPlaying> {
                                   size: heightSize * 0.042,
                                 ),
                                 color: regular, // Colors.white,
-                                onPressed: () {},
+                                onPressed: () async {
+                                  int result = await audioPlayer.seek(Duration(
+                                      milliseconds:
+                                          position.inMilliseconds + 1200));
+                                },
                               ),
                             ),
                           ),
