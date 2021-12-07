@@ -1,8 +1,10 @@
+import 'package:Airplay/core/getmp3.dart';
 import 'package:Airplay/ui/now_playing/now_playing.dart';
 import 'package:Airplay/utils/colors.dart';
 import 'package:Airplay/utils/spacing.dart';
 import 'package:Airplay/widget/customtext.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'dart:async';
 import 'dart:io';
 import 'package:id3/id3.dart';
@@ -18,27 +20,28 @@ class SongsLV extends StatefulWidget {
 
 class _SongsLVState extends State<SongsLV> {
   List<int> fav = [];
-  Directory dir = Directory('/storage/emulated/0');
+  final Controller c = Get.put(Controller());
+  // Directory dir = Directory('/storage/emulated/0');
 
-  List<FileSystemEntity> _files = [];
-  List<FileSystemEntity> _songs = [];
+  // List<FileSystemEntity> _files = [];
+  // List<FileSystemEntity> _songs = [];
   void initlist() async {
     // var status = await Permission.storage.status;
     //               if (!status.isGranted) {
     //                 await Permission.storage.request();
     //               }
-    if (await Permission.storage.request().isGranted) {
-      String mp3Path = dir.toString();
-      print(mp3Path);
-      _files = dir.listSync(recursive: true, followLinks: false);
-      for (FileSystemEntity entity in _files) {
-        String path = entity.path;
-        if (path.endsWith('.mp3')) _songs.add(entity);
-      }
-      print(_songs);
-      print(_songs.length);
-      setState(() {});
-    }
+    // if (await Permission.storage.request().isGranted) {
+    //   String mp3Path = dir.toString();
+    //   print(mp3Path);
+    //   _files = dir.listSync(recursive: true, followLinks: false);
+    //   for (FileSystemEntity entity in _files) {
+    //     String path = entity.path;
+    //     if (path.endsWith('.mp3')) _songs.add(entity);
+    //   }
+    //   print(_songs);
+    //   print(_songs.length);
+    //   setState(() {});
+    // }
   }
 
   @override
@@ -49,7 +52,7 @@ class _SongsLVState extends State<SongsLV> {
 
   @override
   Widget build(BuildContext context) {
-    return _files.isEmpty
+    return Obx(() => RxBool(c.files.isEmpty).isTrue
         ? Center(child: CircularProgressIndicator())
         : Column(
             children: [
@@ -61,16 +64,17 @@ class _SongsLVState extends State<SongsLV> {
                     physics: const NeverScrollableScrollPhysics(),
                     itemBuilder: (BuildContext context, int index) {
                       List<int> mp3Bytes =
-                          File(_songs[index].path).readAsBytesSync();
+                          File(c.songs[index].path).readAsBytesSync();
                       MP3Instance mp3instance = new MP3Instance(mp3Bytes);
                       var meta;
-                      if (mp3instance.parseTagsSync()) {
-                        meta = mp3instance.getMetaTags();
-                        print(meta);
+                      if (!(c.songs[index].path).contains("WhatsApp")) {
+                        if (mp3instance.parseTagsSync()) {
+                          meta = mp3instance.getMetaTags();
+                          print(meta);
+                        }
                       }
-                      var filename = _songs[index]
-                          .path
-                          .substring(_songs[index].path.lastIndexOf('/') + 1);
+                      var filename = c.songs[index].path
+                          .substring(c.songs[index].path.lastIndexOf('/') + 1);
                       return Container(
                         color: Theme.of(context).scaffoldBackgroundColor,
                         width: wholescreenWidth(context),
@@ -173,7 +177,7 @@ class _SongsLVState extends State<SongsLV> {
                                     MaterialPageRoute(
                                       builder: (BuildContext context) =>
                                           NowPlaying(
-                                        file: File(_songs[index].path),
+                                        file: File(c.songs[index].path),
                                       ),
                                     ),
                                   );
@@ -194,6 +198,6 @@ class _SongsLVState extends State<SongsLV> {
                 height: MediaQuery.of(context).size.height / 7,
               )
             ],
-          );
+          ));
   }
 }

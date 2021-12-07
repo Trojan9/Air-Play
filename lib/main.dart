@@ -1,11 +1,12 @@
 // @dart=2.9
+import 'package:Airplay/core/getmp3.dart';
 import 'package:Airplay/ui/dashboard/nav_bar.dart';
 import 'package:Airplay/ui/onboarding/splashscreen.dart';
 import 'package:Airplay/utils/theme/config.dart';
 import 'package:Airplay/utils/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
 // import 'package:Airplay/ui/onboarding/splash.dart';
-
+import 'package:get/get.dart';
 import 'package:dart_vlc/dart_vlc.dart';
 // import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,7 +16,7 @@ import 'package:google_fonts/google_fonts.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   DartVLC.initialize();
-  runApp(const MyApp());
+  runApp(GetMaterialApp(home: const MyApp()));
 }
 
 //ValueNotifier<int> cartCount;
@@ -28,9 +29,11 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  final Controller c = Get.put(Controller());
   @override
   void initState() {
     super.initState();
+    c.getmp3();
     currentTheme.addListener(() {
       setState(() {});
     });
