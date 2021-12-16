@@ -1,7 +1,8 @@
 // @dart=2.9
 
 import 'dart:io';
-import 'package:Airplay/core/getmp3.dart';
+import 'package:Airplay/core/controllers/appctrl.dart';
+import 'package:Airplay/core/controllers/getmp3.dart';
 import 'package:get/get.dart';
 import 'package:id3/id3.dart';
 import 'package:Airplay/utils/colors.dart';
@@ -27,11 +28,8 @@ class _FavouriteDriveLVState extends State<FavouriteDriveLV> {
   final FlutterAudioQuery audioQuery = FlutterAudioQuery();
   // returns all artists available
   List<ArtistInfo> artists;
-  final Controller c = Get.put(Controller());
-  // Directory dir = Directory('/storage/emulated/0');
+  final AppController c = Get.find();
 
-  // List<FileSystemEntity> _files = [];
-  // List<FileSystemEntity> _songs = [];
   @override
   void didChangeDependencies() async {
     // TODO: implement didChangeDependencies
@@ -79,36 +77,21 @@ class _FavouriteDriveLVState extends State<FavouriteDriveLV> {
   // }
 
   void initlist() async {
-    // var status = await Permission.storage.status;
-    //               if (!status.isGranted) {
-    //                 await Permission.storage.request();
-    //               }
-    // if (await Permission.storage.request().isGranted) {
-    //   String mp3Path = dir.toString();
-    //   print(mp3Path);
-    //   _files = dir.listSync(recursive: true, followLinks: false);
-    //   for (FileSystemEntity entity in _files) {
-    //     String path = entity.path;
-    //     if (path.endsWith('.mp3')) _songs.add(entity);
-    //   }
-    //   print(_songs);
-    //   print(_songs.length);
-    //   setState(() {});
-    // }
+  
   }
 
   @override
   Widget build(BuildContext context) {
     return Obx(() => Column(
           children: [
-            !RxBool(c.files.isEmpty).value
+            RxBool(c.songs.isEmpty).value
                 ? Center(child: CircularProgressIndicator())
                 : Column(
                     children: [
                       Container(
                         height: MediaQuery.of(context).size.height,
                         child: ListView.builder(
-                            itemCount: c.files.length,
+                            itemCount: c.songs.length,
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
                             itemBuilder: (

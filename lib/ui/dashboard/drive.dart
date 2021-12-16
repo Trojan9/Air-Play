@@ -1,6 +1,6 @@
 import 'package:Airplay/ui/dashboard/driveLIstview/favouritelistview.dart';
 import 'package:Airplay/ui/dashboard/driveLIstview/playlistlistview.dart';
-import 'package:Airplay/ui/dashboard/driveLIstview/sondslistview.dart';
+import 'package:Airplay/ui/dashboard/driveLIstview/songslistview.dart';
 import 'package:Airplay/utils/colors.dart';
 import 'package:Airplay/widget/appbar/customappbar.dart';
 import 'package:Airplay/widget/bottomactivitybar.dart';

@@ -1,5 +1,6 @@
 // @dart=2.9
-import 'package:Airplay/core/getmp3.dart';
+import 'package:Airplay/core/controllers/appctrl.dart';
+import 'package:Airplay/core/controllers/getmp3.dart';
 import 'package:Airplay/ui/dashboard/nav_bar.dart';
 import 'package:Airplay/ui/onboarding/splashscreen.dart';
 import 'package:Airplay/utils/theme/config.dart';
@@ -16,6 +17,7 @@ import 'package:google_fonts/google_fonts.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   DartVLC.initialize();
+  Get.put(AppController(), permanent: true);
   runApp(GetMaterialApp(home: const MyApp()));
 }
 
@@ -30,14 +32,11 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final Controller c = Get.put(Controller());
-  @override
-  void initState() {
-    super.initState();
-    c.getmp3();
-    currentTheme.addListener(() {
-      setState(() {});
-    });
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  
+  // }
 
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,6 @@
 import 'package:Airplay/ui/dashboard/homelistviews/favouritelistview.dart';
 import 'package:Airplay/ui/dashboard/homelistviews/playlistlistview.dart';
-import 'package:Airplay/ui/dashboard/homelistviews/sondslistview.dart';
+import 'package:Airplay/ui/dashboard/homelistviews/songslistview.dart';
 import 'package:Airplay/utils/colors.dart';
 import 'package:Airplay/utils/spacing.dart';
 import 'package:Airplay/widget/appbar.dart';

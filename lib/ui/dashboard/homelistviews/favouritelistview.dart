@@ -1,5 +1,6 @@
 import 'dart:io';
-import 'package:Airplay/core/getmp3.dart';
+import 'package:Airplay/core/controllers/appctrl.dart';
+import 'package:Airplay/core/controllers/getmp3.dart';
 import 'package:get/get.dart';
 import 'package:id3/id3.dart';
 import 'package:Airplay/utils/colors.dart';
@@ -18,7 +19,7 @@ class FavouriteLV extends StatefulWidget {
 }
 
 class _FavouriteLVState extends State<FavouriteLV> {
-  final Controller c = Get.put(Controller());
+  final AppController c = Get.find();
   // Directory dir = Directory('/storage/emulated/0');
 
   // List<FileSystemEntity> _files = [];
@@ -52,14 +53,17 @@ class _FavouriteLVState extends State<FavouriteLV> {
   Widget build(BuildContext context) {
     return Obx(() => Column(
           children: [
-            !RxBool(c.files.isEmpty).value
-                ? Center(child: CircularProgressIndicator())
+            RxBool(c.songs.isEmpty).value
+                ? SizedBox(
+                  height:  100 ,
+                  width:  100,
+                  child: CircularProgressIndicator())
                 : Column(
                     children: [
                       Container(
                         height: MediaQuery.of(context).size.height,
                         child: ListView.builder(
-                            itemCount: c.files.length,
+                            itemCount: c.songs.length,
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
                             itemBuilder: (BuildContext context, int index) {
@@ -81,6 +85,7 @@ class _FavouriteLVState extends State<FavouriteLV> {
                                 color:
                                     Theme.of(context).scaffoldBackgroundColor,
                                 width: wholescreenWidth(context),
+                               
                                 // height: MediaQuery.of(context).size.height / 10,
                                 child: Column(
                                   children: [

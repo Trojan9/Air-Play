@@ -1,4 +1,5 @@
-import 'package:Airplay/core/getmp3.dart';
+import 'package:Airplay/core/controllers/appctrl.dart';
+import 'package:Airplay/core/controllers/getmp3.dart';
 import 'package:Airplay/utils/colors.dart';
 import 'package:Airplay/utils/spacing.dart';
 import 'package:Airplay/widget/customtext.dart';
@@ -18,7 +19,7 @@ class SongsDriveLV extends StatefulWidget {
 
 class _SongsDriveLVState extends State<SongsDriveLV> {
   List<int> fav = [];
-  final Controller c = Get.put(Controller());
+  final AppController c = Get.find();
   void initlist() async {
     // var status = await Permission.storage.status;
     //               if (!status.isGranted) {
@@ -136,6 +137,7 @@ class _SongsDriveLVState extends State<SongsDriveLV> {
                                                 children: [
                                                   fav.contains(index)
                                                       ? IconButton(
+                                                        
                                                           onPressed: () {
                                                             setState(() {
                                                               fav.remove(index);

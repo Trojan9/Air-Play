@@ -1,4 +1,5 @@
-import 'package:Airplay/core/getmp3.dart';
+import 'package:Airplay/core/controllers/appctrl.dart';
+import 'package:Airplay/core/controllers/getmp3.dart';
 import 'package:Airplay/ui/now_playing/now_playing.dart';
 import 'package:Airplay/utils/colors.dart';
 import 'package:Airplay/utils/spacing.dart';
@@ -20,7 +21,7 @@ class SongsLV extends StatefulWidget {
 
 class _SongsLVState extends State<SongsLV> {
   List<int> fav = [];
-  final Controller c = Get.put(Controller());
+  final AppController c = Get.find();
   // Directory dir = Directory('/storage/emulated/0');
 
   // List<FileSystemEntity> _files = [];
@@ -52,14 +53,14 @@ class _SongsLVState extends State<SongsLV> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => RxBool(c.files.isEmpty).isTrue
+    return Obx(() => RxBool(c.songs.isEmpty).isTrue
         ? Center(child: CircularProgressIndicator())
         : Column(
             children: [
               Container(
                 height: MediaQuery.of(context).size.height,
                 child: ListView.builder(
-                    itemCount: 10,
+                    itemCount: c.songs.length,
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     itemBuilder: (BuildContext context, int index) {
@@ -173,6 +174,10 @@ class _SongsLVState extends State<SongsLV> {
                                   ],
                                 ),
                                 onTap: () {
+                                  c.setNowplayingData(
+                                    path: c.songs[index].path,
+                                    meta: meta
+                                  );
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
                                       builder: (BuildContext context) =>

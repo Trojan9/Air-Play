@@ -1,11 +1,15 @@
+import 'package:Airplay/core/controllers/appctrl.dart';
 import 'package:Airplay/utils/colors.dart';
 import 'package:Airplay/utils/spacing.dart';
 import 'package:Airplay/widget/customtext.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class BottomActivityBar extends StatefulWidget {
-  const BottomActivityBar({Key? key}) : super(key: key);
+   BottomActivityBar({Key? key}) : super(key: key);
+
+  final AppController c = Get.find();
 
   @override
   _BottomActivityBarState createState() => _BottomActivityBarState();
