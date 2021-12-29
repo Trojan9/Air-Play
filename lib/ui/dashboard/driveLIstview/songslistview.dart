@@ -1,5 +1,5 @@
 import 'package:Airplay/core/controllers/appctrl.dart';
-import 'package:Airplay/core/controllers/getmp3.dart';
+import 'package:Airplay/core/controllers/nowplayingmp3ctrl.dart';
 import 'package:Airplay/utils/colors.dart';
 import 'package:Airplay/utils/spacing.dart';
 import 'package:Airplay/widget/customtext.dart';
@@ -137,7 +137,6 @@ class _SongsDriveLVState extends State<SongsDriveLV> {
                                                 children: [
                                                   fav.contains(index)
                                                       ? IconButton(
-                                                        
                                                           onPressed: () {
                                                             setState(() {
                                                               fav.remove(index);

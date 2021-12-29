@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:Airplay/core/controllers/appctrl.dart';
-import 'package:Airplay/core/controllers/getmp3.dart';
+import 'package:Airplay/core/controllers/nowplayingmp3ctrl.dart';
 import 'package:get/get.dart';
 import 'package:id3/id3.dart';
 import 'package:Airplay/utils/colors.dart';
@@ -55,9 +55,7 @@ class _FavouriteLVState extends State<FavouriteLV> {
           children: [
             RxBool(c.songs.isEmpty).value
                 ? SizedBox(
-                  height:  100 ,
-                  width:  100,
-                  child: CircularProgressIndicator())
+                    height: 100, width: 100, child: CircularProgressIndicator())
                 : Column(
                     children: [
                       Container(
@@ -85,7 +83,7 @@ class _FavouriteLVState extends State<FavouriteLV> {
                                 color:
                                     Theme.of(context).scaffoldBackgroundColor,
                                 width: wholescreenWidth(context),
-                               
+
                                 // height: MediaQuery.of(context).size.height / 10,
                                 child: Column(
                                   children: [

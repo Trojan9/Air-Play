@@ -1,5 +1,5 @@
 import 'package:Airplay/core/controllers/appctrl.dart';
-import 'package:Airplay/core/controllers/getmp3.dart';
+import 'package:Airplay/core/controllers/nowplayingmp3ctrl.dart';
 import 'package:Airplay/ui/now_playing/now_playing.dart';
 import 'package:Airplay/utils/colors.dart';
 import 'package:Airplay/utils/spacing.dart';
@@ -175,9 +175,7 @@ class _SongsLVState extends State<SongsLV> {
                                 ),
                                 onTap: () {
                                   c.setNowplayingData(
-                                    path: c.songs[index].path,
-                                    meta: meta
-                                  );
+                                      path: c.songs[index].path, meta: meta);
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
                                       builder: (BuildContext context) =>

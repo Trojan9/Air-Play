@@ -2,7 +2,7 @@
 
 import 'dart:io';
 import 'package:Airplay/core/controllers/appctrl.dart';
-import 'package:Airplay/core/controllers/getmp3.dart';
+import 'package:Airplay/core/controllers/nowplayingmp3ctrl.dart';
 import 'package:get/get.dart';
 import 'package:id3/id3.dart';
 import 'package:Airplay/utils/colors.dart';
@@ -76,9 +76,7 @@ class _FavouriteDriveLVState extends State<FavouriteDriveLV> {
   //   return completer.future;
   // }
 
-  void initlist() async {
-  
-  }
+  void initlist() async {}
 
   @override
   Widget build(BuildContext context) {

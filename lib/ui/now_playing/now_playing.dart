@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:io';
 import 'package:Airplay/core/controllers/appctrl.dart';
+import 'package:Airplay/core/controllers/nowplayingmp3ctrl.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:get/get.dart';
 import 'package:id3/id3.dart';
@@ -22,15 +23,15 @@ class NowPlaying extends StatefulWidget {
 }
 
 class _NowPlayingState extends State<NowPlaying> {
-  AudioPlayer audioPlayer = AudioPlayer();
+  // AudioPlayer audioPlayer = AudioPlayer();
+  final Controller c = Get.put(Controller());
   double _value = 1.0;
   var meta;
   var filename;
   TextEditingController controller = new TextEditingController();
   TextEditingController metasController = new TextEditingController();
   double bufferingProgress = 0.0;
-  Duration duration = Duration(seconds: 0, minutes: 0);
-  Duration position = Duration();
+
   @override
   void initState() {
     // TODO: implement initState
@@ -49,32 +50,19 @@ class _NowPlayingState extends State<NowPlaying> {
 
     super.initState();
 
-    playLocal(widget.file.path);
-    audioPlayer.onDurationChanged.listen((Duration d) {
+    c.playLocal(widget.file.path);
+    c.audioPlayer.onDurationChanged.listen((Duration d) {
       print('Max duration: $d');
-      setState(() => duration = d);
+      c.duration.value = d;
     });
-    audioPlayer.onAudioPositionChanged.listen((Duration p) =>
-        {print('Current position: $p'), setState(() => position = p)});
-  }
-
-  String checktime(Duration time) {
-    int min = (time.inSeconds / 60).toInt();
-    int seconds = (time.inSeconds % 60).toInt();
-    int hour = (time.inSeconds / 3600).toInt();
-    if (hour > 0) {
-      return "$hour:$min:$seconds";
-    } else if (min > 0) {
-      return "$min:$seconds";
-    } else {
-      return "$min:$seconds";
-    }
+    c.audioPlayer.onAudioPositionChanged.listen(
+        (Duration p) => {print('Current position: $p'), c.position.value = p});
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
-    audioPlayer.dispose();
+    // audioPlayer.dispose();
     super.dispose();
   }
 
@@ -83,19 +71,6 @@ class _NowPlayingState extends State<NowPlaying> {
     super.didChangeDependencies();
 
     this.setState(() {});
-  }
-
-  bool play = true;
-  playUrl(var url) async {
-    int result = await audioPlayer.play(url);
-    if (result == 1) {
-      // success
-    }
-  }
-
-  playLocal(var localPath) async {
-    int result = await audioPlayer.play(localPath, isLocal: true);
-    print(result);
   }
 
   @override
@@ -193,193 +168,196 @@ class _NowPlayingState extends State<NowPlaying> {
                   ],
                 ),
                 SizedBox(height: heightSize * 0.005),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      width: double.infinity,
-                      child: Slider(
-                        //   value: _value,
-                        //   min: 0.0,
-                        //   max: 100.0,
-                        //   label: '$_value',
-                        //   activeColor: regular,
-                        //   inactiveColor: Colors.white,
-                        //   onChanged: (newValue) {
-                        //     setState(() {
-                        //       _value = newValue;
-                        //     });
-                        //   },
-                        // ),
-                        min: 0,
-                        max: duration.inMilliseconds.toDouble(),
-                        label: "${position.inMilliseconds.toDouble()}",
-                        activeColor: regular,
-                        inactiveColor: Colors.white,
-                        value: position.inMilliseconds.toDouble(),
-                        onChanged: (position) async {
-                          int result = await audioPlayer
-                              .seek(Duration(milliseconds: position.toInt()));
-                          print(result);
-                        },
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "${checktime(position)}",
-                            style: TextStyle(
-                              fontSize: heightSize * 0.020,
-                              fontWeight: FontWeight.w300,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Text(
-                            '${checktime(duration)}',
-                            style: TextStyle(
-                              fontSize: heightSize * 0.020,
-                              fontWeight: FontWeight.w300,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: heightSize * 0.040),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                Obx(() => Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        IconButton(
-                          icon: Icon(
-                            Icons.shuffle,
-                            size: heightSize * 0.042,
-                          ),
-                          color: regular, // Colors.white,
-                          onPressed: () {},
-                        ),
                         Container(
-                          height: heightSize * 0.069,
-                          width: heightSize * 0.069,
-                          decoration: BoxDecoration(
-                            color: regular,
-                            borderRadius: BorderRadius.circular(100),
+                          width: double.infinity,
+                          child: Slider(
+                            //   value: _value,
+                            //   min: 0.0,
+                            //   max: 100.0,
+                            //   label: '$_value',
+                            //   activeColor: regular,
+                            //   inactiveColor: Colors.white,
+                            //   onChanged: (newValue) {
+                            //     setState(() {
+                            //       _value = newValue;
+                            //     });
+                            //   },
+                            // ),
+                            min: 0,
+                            max: c.duration.value.inMilliseconds.toDouble(),
+                            label:
+                                "${c.position.value.inMilliseconds.toDouble()}",
+                            activeColor: regular,
+                            inactiveColor: Colors.white,
+                            value: c.position.value.inMilliseconds.toDouble(),
+                            onChanged: (position) async {
+                              int result = await c.audioPlayer.seek(
+                                  Duration(milliseconds: position.toInt()));
+                              print(result);
+                            },
                           ),
-                          child: Center(
-                            child: Container(
-                              height: heightSize * 0.064,
-                              width: heightSize * 0.064,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 20.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "${c.checktime(c.position.value)}",
+                                style: TextStyle(
+                                  fontSize: heightSize * 0.020,
+                                  fontWeight: FontWeight.w300,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              Text(
+                                '${c.checktime(c.duration.value)}',
+                                style: TextStyle(
+                                  fontSize: heightSize * 0.020,
+                                  fontWeight: FontWeight.w300,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: heightSize * 0.040),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            IconButton(
+                              icon: Icon(
+                                Icons.shuffle,
+                                size: heightSize * 0.042,
+                              ),
+                              color: regular, // Colors.white,
+                              onPressed: () {},
+                            ),
+                            Container(
+                              height: heightSize * 0.069,
+                              width: heightSize * 0.069,
                               decoration: BoxDecoration(
-                                color: backgroundcolor2,
+                                color: regular,
                                 borderRadius: BorderRadius.circular(100),
                               ),
                               child: Center(
-                                child: IconButton(
-                                  icon: Icon(
-                                    Icons.fast_rewind_sharp,
-                                    size: heightSize * 0.042,
+                                child: Container(
+                                  height: heightSize * 0.064,
+                                  width: heightSize * 0.064,
+                                  decoration: BoxDecoration(
+                                    color: backgroundcolor2,
+                                    borderRadius: BorderRadius.circular(100),
                                   ),
-                                  color: regular, // Colors.white,
-                                  onPressed: () async {
-                                    int result = await audioPlayer.seek(
-                                        Duration(
-                                            milliseconds:
-                                                position.inMilliseconds -
+                                  child: Center(
+                                    child: IconButton(
+                                      icon: Icon(
+                                        Icons.fast_rewind_sharp,
+                                        size: heightSize * 0.042,
+                                      ),
+                                      color: regular, // Colors.white,
+                                      onPressed: () async {
+                                        int result = await c.audioPlayer.seek(
+                                            Duration(
+                                                milliseconds: c.position.value
+                                                        .inMilliseconds -
                                                     1200));
-                                  },
+                                      },
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ),
-                        Container(
-                          height: heightSize * 0.069,
-                          width: heightSize * 0.069,
-                          decoration: BoxDecoration(
-                            color: regular,
-                            borderRadius: BorderRadius.circular(100),
-                          ),
-                          child: Center(
-                            child: Container(
-                              height: heightSize * 0.064,
-                              width: heightSize * 0.064,
+                            Container(
+                              height: heightSize * 0.069,
+                              width: heightSize * 0.069,
                               decoration: BoxDecoration(
-                                color: backgroundcolor2,
+                                color: regular,
                                 borderRadius: BorderRadius.circular(100),
                               ),
                               child: Center(
-                                child: IconButton(
-                                  icon: Icon(
-                                    play ? Icons.pause : Icons.play_arrow,
-                                    size: heightSize * 0.042,
+                                child: Container(
+                                  height: heightSize * 0.064,
+                                  width: heightSize * 0.064,
+                                  decoration: BoxDecoration(
+                                    color: backgroundcolor2,
+                                    borderRadius: BorderRadius.circular(100),
                                   ),
-                                  color: regular, // Colors.white,
-                                  onPressed: () async {
-                                    if (play) {
-                                      int result = await audioPlayer.pause();
-                                      setState(() {
-                                        play = false;
-                                      });
-                                    } else {
-                                      int result = await audioPlayer.resume();
-                                      setState(() {
-                                        play = true;
-                                      });
-                                    }
-                                  },
+                                  child: Center(
+                                    child: IconButton(
+                                      icon: Icon(
+                                        c.play.value
+                                            ? Icons.pause
+                                            : Icons.play_arrow,
+                                        size: heightSize * 0.042,
+                                      ),
+                                      color: regular, // Colors.white,
+                                      onPressed: () async {
+                                        if (c.play.value) {
+                                          int result =
+                                              await c.audioPlayer.pause();
+
+                                          c.play.value = false;
+                                        } else {
+                                          int result =
+                                              await c.audioPlayer.resume();
+
+                                          c.play.value = true;
+                                        }
+                                      },
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ),
-                        Container(
-                          height: heightSize * 0.069,
-                          width: heightSize * 0.069,
-                          decoration: BoxDecoration(
-                            color: regular,
-                            borderRadius: BorderRadius.circular(100),
-                          ),
-                          child: Center(
-                            child: Container(
-                              height: heightSize * 0.064,
-                              width: heightSize * 0.064,
+                            Container(
+                              height: heightSize * 0.069,
+                              width: heightSize * 0.069,
                               decoration: BoxDecoration(
-                                color: backgroundcolor2,
+                                color: regular,
                                 borderRadius: BorderRadius.circular(100),
                               ),
                               child: Center(
-                                child: IconButton(
-                                  icon: Icon(
-                                    Icons.fast_forward_sharp,
-                                    size: heightSize * 0.042,
+                                child: Container(
+                                  height: heightSize * 0.064,
+                                  width: heightSize * 0.064,
+                                  decoration: BoxDecoration(
+                                    color: backgroundcolor2,
+                                    borderRadius: BorderRadius.circular(100),
                                   ),
-                                  color: regular, // Colors.white,
-                                  onPressed: () async {
-                                    int result = await audioPlayer.seek(
-                                        Duration(
-                                            milliseconds:
-                                                position.inMilliseconds +
+                                  child: Center(
+                                    child: IconButton(
+                                      icon: Icon(
+                                        Icons.fast_forward_sharp,
+                                        size: heightSize * 0.042,
+                                      ),
+                                      color: regular, // Colors.white,
+                                      onPressed: () async {
+                                        int result = await c.audioPlayer.seek(
+                                            Duration(
+                                                milliseconds: c.position.value
+                                                        .inMilliseconds +
                                                     1200));
-                                  },
+                                      },
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ),
-                        IconButton(
-                          icon: Icon(
-                            Icons.repeat_rounded,
-                            size: heightSize * 0.042,
-                          ),
-                          color: regular, // Colors.white,
-                          onPressed: () {},
+                            IconButton(
+                              icon: Icon(
+                                Icons.repeat_rounded,
+                                size: heightSize * 0.042,
+                              ),
+                              color: regular, // Colors.white,
+                              onPressed: () {},
+                            ),
+                          ],
                         ),
                       ],
-                    ),
-                  ],
-                )
+                    ))
               ],
             ),
           ),
