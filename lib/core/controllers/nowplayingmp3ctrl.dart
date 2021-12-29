@@ -4,7 +4,6 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:get/get.dart';
 
 class Controller extends GetxController {
-  var count = 0.obs;
   var duration = Duration(seconds: 0, minutes: 0).obs;
   var position = Duration().obs;
   AudioPlayer audioPlayer = AudioPlayer();
