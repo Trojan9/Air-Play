@@ -1,6 +1,6 @@
 // @dart=2.9
 import 'package:Airplay/core/controllers/appctrl.dart';
-import 'package:Airplay/core/controllers/nowplayingmp3.dart';
+import 'package:Airplay/core/controllers/nowplayingmp3ctrl.dart';
 import 'package:Airplay/ui/dashboard/nav_bar.dart';
 import 'package:Airplay/ui/onboarding/splashscreen.dart';
 import 'package:Airplay/utils/theme/config.dart';
@@ -31,7 +31,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final Controller c = Get.put(Controller());
+  
   // @override
   // void initState() {
   //   super.initState();
